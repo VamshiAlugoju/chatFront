@@ -1,0 +1,17 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --vh: 1vh;
+}
+
+/* body {
+  @apply font-lato;
+  height: 100vh;
+  height: calc(var(--vh, 1vh) * 100);
+} */
+
+* {
+  box-sizing: border-box;
+}
