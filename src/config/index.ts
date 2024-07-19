@@ -20,15 +20,18 @@ export const MESSAGES_PER_PAGE = 30;
 export const FAKE_EMAIL = true;
 
 export const getAPIUrl = () => {
-  return typeof window !== "undefined"
-    ? process.env.REACT_APP_API_URL ||
-        `${window?.location.protocol}//${window?.location.hostname}:4001`
-    : "";
+  // return typeof window !== "undefined"
+  //   ? process.env.REACT_APP_API_URL ||
+  //       `${window?.location.protocol}//${window?.location.hostname}:4001`
+  //   : "";
+    return "";
 };
 
 export const getGQLServerUrl = () => {
-  return typeof window !== "undefined"
-    ? process.env.REACT_APP_GQL_SERVER_URL ||
-        `${window?.location.protocol}//${window?.location.hostname}:4000`
-    : "";
+  // return typeof window !== "undefined"
+  //   ? process.env.REACT_APP_GQL_SERVER_URL ||
+  //       `${window?.location.protocol}//${window?.location.hostname}:4000`
+  //   : "";
+
+    return "";
 };

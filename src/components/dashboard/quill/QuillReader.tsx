@@ -1,11 +1,11 @@
-import Style from "components/Style";
-import { useTheme } from "contexts/ThemeContext";
-import { useForceUpdate } from "lib/hooks";
+import Style from "../../../components/Style";
+import { useTheme } from "../../../contexts/ThemeContext";
+import { useForceUpdate } from "../../../lib/hooks";
 import { useEffect, useRef } from "react";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.bubble.css";
-import classNames from "utils/classNames";
-import hexToRgbA from "utils/hexToRgbA";
+import classNames from "../../../utils/classNames";
+import hexToRgbA from "../../../utils/hexToRgbA";
 
 export default function Reader({
   text,
@@ -22,7 +22,7 @@ export default function Reader({
 
   const onlyText = unprivilegedEditor?.getText();
 
-  const endWithPTag = text.substr(text?.length - 4) === "</p>";
+  const endWithPTag = text.substring(text?.length - 4) === "</p>";
 
   const position = endWithPTag ? text?.length - 4 : text?.length;
 
@@ -36,11 +36,11 @@ export default function Reader({
             text.slice(position),
           ].join("")
       : text;
-
+  console.log(display)
   useEffect(() => {
     forceUpdate();
   }, [text, display]);
-
+  console.log(themeColors , ">>>>>>>>>>>>>>>>>...")
   return (
     <>
       <Style
@@ -56,14 +56,14 @@ export default function Reader({
           .ql-bubble .ql-editor pre.ql-syntax {
             background-color: ${themeColors?.brightBlack};
             color: ${themeColors?.brightWhite};
-            border-color: ${hexToRgbA(themeColors?.background!, "0.2")};
+            border-color: ${hexToRgbA( themeColors ? themeColors.background : undefined , "0.2")};
             border-width: 1px;
           }
           .ql-bubble .ql-editor code,
           .ql-bubble .ql-editor pre {
             background-color: ${themeColors?.brightBlack};
             color: ${themeColors?.brightWhite};
-            border-color: ${hexToRgbA(themeColors?.background!, "0.2")};
+            border-color: ${hexToRgbA(themeColors ? themeColors.background : undefined, "0.2")};
             border-width: 1px;
           }
 

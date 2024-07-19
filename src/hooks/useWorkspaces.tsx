@@ -1,7 +1,7 @@
-import { useQuery, useSubscription } from "@apollo/client";
-import { useUser } from "contexts/UserContext";
-import * as queries from "graphql/queries";
-import * as subscriptions from "graphql/subscriptions";
+// import { useQuery, useSubscription } from "@apollo/client";
+// import { useUser } from "contexts/UserContext";
+// import * as queries from "graphql/queries";
+// import * as subscriptions from "graphql/subscriptions";
 import React, { createContext, useContext, useEffect, useState } from "react";
 
 export const WorkspacesContext = createContext({
@@ -10,7 +10,8 @@ export const WorkspacesContext = createContext({
 });
 
 export function useMyWorkspaces() {
-  const { user } = useUser();
+  // const { user } = useUser();
+  const user = {uid : 1}
   const { value, loading } = useContext(WorkspacesContext);
 
   return {
@@ -31,16 +32,21 @@ export function WorkspacesProvider({
 }: {
   children: React.ReactNode;
 }) {
-  const { user } = useUser();
+  // const { user } = useUser();
+  const user = {};
   const [workspaces, setWorkspaces] = useState<any[]>([]);
 
-  const { data, loading } = useQuery(queries.LIST_WORKSPACES, {
-    skip: !user,
-    fetchPolicy: "cache-and-network",
-  });
-  const { data: dataPush } = useSubscription(subscriptions.WORKSPACE, {
-    skip: !user,
-  });
+  const data = {listWorkspaces :[]};
+  const loading = false;
+  const dataPush = {onUpdateWorkspace :{objectId : 1}};
+
+  // const { data, loading } = useQuery(queries.LIST_WORKSPACES, {
+  //   skip: !user,
+  //   fetchPolicy: "cache-and-network",
+  // });
+  // const { data: dataPush } = useSubscription(subscriptions.WORKSPACE, {
+  //   skip: !user,
+  // });
 
   useEffect(() => {
     if (data) setWorkspaces(data.listWorkspaces);

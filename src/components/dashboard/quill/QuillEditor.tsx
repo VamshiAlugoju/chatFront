@@ -454,14 +454,14 @@ function Editor({
     const type = dmId ? "directs" : "channels";
     const id = dmId || channelId;
     if (isTyping) {
-      postData(
-        `/${type}/${id}/typing_indicator`,
-        {
-          isTyping: true,
-        },
-        {},
-        false
-      );
+      // postData(
+      //   `/${type}/${id}/typing_indicator`,
+      //   {
+      //     isTyping: true,
+      //   },
+      //   {},
+      //   false
+      // );
     }
   }, [isTyping]);
 
@@ -472,25 +472,25 @@ function Editor({
 
     if (isTyping && !isSubmitting) {
       interval = setInterval(() => {
-        postData(
-          `/${type}/${id}/typing_indicator`,
-          {
-            isTyping: true,
-          },
-          {},
-          false
-        );
+        // postData(
+        //   `/${type}/${id}/typing_indicator`,
+        //   {
+        //     isTyping: true,
+        //   },
+        //   {},
+        //   false
+        // );
       }, 3000);
     } else {
       clearInterval(interval);
-      postData(
-        `/${type}/${id}/typing_indicator`,
-        {
-          isTyping: false,
-        },
-        {},
-        false
-      );
+      // postData(
+      //   `/${type}/${id}/typing_indicator`,
+      //   {
+      //     isTyping: false,
+      //   },
+      //   {},
+      //   false
+      // );
     }
     return () => clearInterval(interval);
   }, [isTyping]);

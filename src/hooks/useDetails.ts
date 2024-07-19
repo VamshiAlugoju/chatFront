@@ -1,8 +1,8 @@
-import { useQuery, useSubscription } from "@apollo/client";
-import { DetailsContext } from "contexts/DetailsContext";
-import * as queries from "graphql/queries";
-import * as subscriptions from "graphql/subscriptions";
-import useAuth from "hooks/useAuth";
+// import { useQuery, useSubscription } from "@apollo/client";
+import { DetailsContext } from "../contexts/DetailsContext";
+// import * as queries from "../graphql/queries";
+// import * as subscriptions from "../graphql/subscriptions";
+import useAuth from "../hooks/useAuth";
 import { useContext, useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 
@@ -15,21 +15,26 @@ export function useDetailsByWorkspace() {
 
   const [details, setDetails] = useState<any[]>([]);
 
-  const { data, loading } = useQuery(queries.LIST_DETAILS, {
-    variables: {
-      workspaceId,
-      userId: user?.uid,
-    },
-    skip: !user || !workspaceId,
-    fetchPolicy: "cache-and-network",
-  });
-  const { data: dataPush } = useSubscription(subscriptions.DETAIL, {
-    variables: {
-      workspaceId,
-      userId: user?.uid,
-    },
-    skip: !user || !workspaceId,
-  });
+  const data = {listDetails : []};
+  const loading = false;
+
+  // const { data, loading } = useQuery(queries.LIST_DETAILS, {
+  //   variables: {
+  //     workspaceId,
+  //     userId: user?.uid,
+  //   },
+  //   skip: !user || !workspaceId,
+  //   fetchPolicy: "cache-and-network",
+  // });
+  const dataPush = {onUpdateDetail:{objectId : 1}};
+
+  // const { data: dataPush } = useSubscription(subscriptions.DETAIL, {
+  //   variables: {
+  //     workspaceId,
+  //     userId: user?.uid,
+  //   },
+  //   skip: !user || !workspaceId,
+  // });
 
   useEffect(() => {
     if (data) setDetails(data.listDetails);

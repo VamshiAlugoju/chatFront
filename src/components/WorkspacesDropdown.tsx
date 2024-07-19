@@ -2,8 +2,8 @@ import { Listbox, Transition } from "@headlessui/react";
 // @ts-ignore
 import { CheckIcon, SelectorIcon } from "@heroicons/react/solid";
 import { Fragment } from "react";
-import classNames from "utils/classNames";
-import { getHref } from "utils/get-file-url";
+import classNames from "../utils/classNames";
+import { getHref } from "../utils/get-file-url";
 
 export function WorkspacesSelectDropdown({
   workspaces,

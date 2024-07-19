@@ -1,9 +1,9 @@
 import { useQuery, useSubscription } from "@apollo/client";
-import * as queries from "graphql/queries";
-import * as subscriptions from "graphql/subscriptions";
-import useAuth from "hooks/useAuth";
+// import * as queries from "graphql/queries";
+// import * as subscriptions from "graphql/subscriptions";
+import useAuth from "../hooks/useAuth";
 import { useEffect, useState } from "react";
-import timeDiff from "utils/time-diff";
+import timeDiff from "../utils/time-diff";
 
 export function usePresenceByUserId(id?: string | null) {
   const { user } = useAuth();
@@ -21,18 +21,23 @@ export function usePresenceByUserId(id?: string | null) {
 
   const [currentPresence, setCurrentPresence] = useState<any>(null);
 
-  const { data, loading } = useQuery(queries.GET_PRESENCE, {
-    variables: {
-      objectId: id,
-    },
-    skip: !id,
-  });
-  const { data: dataPush } = useSubscription(subscriptions.PRESENCE, {
-    variables: {
-      objectId: id,
-    },
-    skip: !id,
-  });
+  const data = {getPresence : ""};
+  const loading = false;
+
+  // const { data, loading } = useQuery(queries.GET_PRESENCE, {
+  //   variables: {
+  //     objectId: id,
+  //   },
+  //   skip: !id,
+  // });
+  const dataPush = {onUpdatePresence : ""};
+
+  // const { data: dataPush } = useSubscription(subscriptions.PRESENCE, {
+  //   variables: {
+  //     objectId: id,
+  //   },
+  //   skip: !id,
+  // });
 
   useEffect(() => {
     if (data) setCurrentPresence(data.getPresence);

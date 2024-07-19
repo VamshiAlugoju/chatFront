@@ -1,8 +1,9 @@
-import { Dialog, DialogPanel, Transition } from "@headlessui/react";
-// @ts-ignore
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import { Dialog, DialogPanel, Transition, TransitionChild } from "@headlessui/react";
+ 
 import { XIcon } from "@heroicons/react/outline";
-import CancelButton from "components/CancelButton";
-import ModalButton from "components/dashboard/ModalButton";
+import CancelButton from "../components/CancelButton";
+import ModalButton from "../components/dashboard/ModalButton";
 import React, { Fragment, useState } from "react";
 
 export default function ConfirmationModal({
@@ -27,7 +28,7 @@ export default function ConfirmationModal({
   };
 
   return (
-    <Transition.Root show={open} as={Fragment}>
+    <Transition show={open} as={Fragment}>
       <Dialog
         as="div"
         static
@@ -36,7 +37,7 @@ export default function ConfirmationModal({
         onClose={setOpen}
       >
         <div className="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
-          <Transition.Child
+          <TransitionChild
             as={Fragment}
             enter="ease-out duration-300"
             enterFrom="opacity-0"
@@ -46,7 +47,7 @@ export default function ConfirmationModal({
             leaveTo="opacity-0"
           >
             <DialogPanel className="fixed inset-0 bg-gray-900 bg-opacity-50 transition-opacity" />
-          </Transition.Child>
+          </TransitionChild>
 
           {/* This element is to trick the browser into centering the modal contents. */}
           <span
@@ -55,7 +56,7 @@ export default function ConfirmationModal({
           >
             &#8203;
           </span>
-          <Transition.Child
+          <TransitionChild
             as={Fragment}
             enter="ease-out duration-300"
             enterFrom="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
@@ -86,9 +87,9 @@ export default function ConfirmationModal({
                 <CancelButton setOpen={setOpen} />
               </div>
             </div>
-          </Transition.Child>
+          </TransitionChild>
         </div>
       </Dialog>
-    </Transition.Root>
+    </Transition>
   );
 }

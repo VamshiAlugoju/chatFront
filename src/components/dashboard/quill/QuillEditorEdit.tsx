@@ -1,8 +1,8 @@
 import { Popover } from "@headlessui/react";
 import { EmojiHappyIcon } from "@heroicons/react/outline";
-import { useTheme } from "contexts/ThemeContext";
+import { useTheme } from "../../../contexts/ThemeContext";
 import { Picker } from "emoji-mart";
-import "emoji-mart/css/emoji-mart.css";
+// import "emoji-mart/css/emoji-mart.css";
 import { useMemo } from "react";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";

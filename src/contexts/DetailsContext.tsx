@@ -1,4 +1,4 @@
-import { useDetailsByWorkspace } from "hooks/useDetails";
+import { useDetailsByWorkspace } from "../hooks/useDetails";
 import { createContext } from "react";
 
 export const DetailsContext = createContext({

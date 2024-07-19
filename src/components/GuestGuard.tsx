@@ -1,5 +1,5 @@
-import LoadingScreen from "components/LoadingScreen";
-import useAuth from "hooks/useAuth";
+import LoadingScreen from "../components/LoadingScreen";
+import useAuth from "../hooks/useAuth";
 import React from "react";
 import { Navigate } from "react-router-dom";
 

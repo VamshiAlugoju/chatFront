@@ -1,12 +1,12 @@
-import QuillEditorEdit from "components/dashboard/quill/QuillEditorEdit";
-import Spinner from "components/Spinner";
-import { MESSAGE_MAX_CHARACTERS } from "config";
-import { useTheme } from "contexts/ThemeContext";
+import QuillEditorEdit from "../../../components/dashboard/quill/QuillEditorEdit";
+import Spinner from "../../../components/Spinner";
+import { MESSAGE_MAX_CHARACTERS } from "../../../config";
+import { useTheme } from "../../../contexts/ThemeContext";
 import { Formik } from "formik";
-import { useForceUpdate } from "lib/hooks";
+import { useForceUpdate } from "../../../lib/hooks";
 import React, { useRef } from "react";
 import toast from "react-hot-toast";
-import { postData } from "utils/api-helpers";
+import { postData } from "../../../utils/api-helpers";
 
 function EditMessageFooter({
   setEdit,

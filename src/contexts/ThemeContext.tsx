@@ -54,7 +54,30 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
   const [theme, setTheme] = useState(
     localStorage.getItem("theme") || DEFAULT_THEME
   );
-  const [themeColors, setThemeColors] = useState<IColor | null>(null);
+  const [themeColors, setThemeColors] = useState<IColor | null>({
+    "name": "Theme01",
+    "black": "#373a41",
+    "red": "#d52753",
+    "green": "#23974a",
+    "yellow": "#df631c",
+    "blue": "#275fe4",
+    "purple": "#823ff1",
+    "cyan": "#27618d",
+    "white": "#babbc2",
+    "brightBlack": "#676a77",
+    "brightRed": "#ff6480",
+    "brightGreen": "#3cbc66",
+    "brightYellow": "#c5a332",
+    "brightBlue": "#0099e1",
+    "brightPurple": "#ce33c0",
+    "brightCyan": "#6d93bb",
+    "brightWhite": "#d3d3d3",
+    "background": "#f9f9f9",
+    "foreground": "#373a41",
+    "cursorColor": "#f32759",
+    "selectionBackground": "#daf0ff",
+    "messageFontWeight": "regular"
+  });
   const themesList = useMemo(
     () =>
       Array.from(
@@ -106,16 +129,17 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
   }, [themeColors]);
 
   const getThemeColors = useCallback(() => {
-    fetch(`${process.env.PUBLIC_URL}/themes/${theme}.json`, {
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json",
-      },
-    })
-      .then((response) => response.json())
-      .then((json) => {
-        setThemeColors(json);
-      });
+
+    // fetch(`${process.env.PUBLIC_URL}/themes/${theme}.json`, {
+    //   headers: {
+    //     "Content-Type": "application/json",
+    //     Accept: "application/json",
+    //   },
+    // })
+    //   .then((response) => response.json())
+    //   .then((json) => {
+    //     setThemeColors(json);
+    //   });
   }, [theme]);
 
   useEffect(() => {

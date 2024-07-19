@@ -1,11 +1,10 @@
-import { Listbox, Transition } from "@headlessui/react";
-// @ts-ignore
+import { Listbox, ListboxButton, Transition } from "@headlessui/react";
 import { EmojiHappyIcon } from "@heroicons/react/outline";
-import { reactions } from "lib/reactions";
+import { reactions } from "../lib/reactions";
 import { Fragment, useEffect, useState } from "react";
 import toast from "react-hot-toast";
-import { postData } from "utils/api-helpers";
-import classNames from "utils/classNames";
+import { postData } from "../utils/api-helpers";
+import classNames from "../utils/classNames";
 
 export function ReactionModal({
   messageId,
@@ -32,6 +31,7 @@ export function ReactionModal({
           await postData(`/messages/${messageId}/reactions`, {
             reaction: e.value,
           });
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         } catch (err: any) {
           toast.error(err.message);
         }
@@ -41,10 +41,10 @@ export function ReactionModal({
         <>
           <Listbox.Label className="sr-only">Reaction</Listbox.Label>
           <div className="relative flex flex-1">
-            <Listbox.Button className="th-bg-bg th-border-selbg th-color-for relative inline-flex items-center px-3 py-1 border text-sm font-medium focus:z-10 focus:outline-none">
+            <ListboxButton className="th-bg-bg th-border-selbg th-color-for relative inline-flex items-center px-3 py-1 border text-sm font-medium focus:z-10 focus:outline-none">
               <span className="sr-only">Reaction</span>
               <EmojiHappyIcon className="h-4 w-4" />
-            </Listbox.Button>
+            </ListboxButton>
 
             <Transition
               show={open}

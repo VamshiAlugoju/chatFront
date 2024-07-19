@@ -1,6 +1,6 @@
-import { useQuery, useSubscription } from "@apollo/client";
-import * as queries from "graphql/queries";
-import * as subscriptions from "graphql/subscriptions";
+// import { useQuery, useSubscription } from "@apollo/client";
+// import * as queries from "graphql/queries";
+// import * as subscriptions from "graphql/subscriptions";
 import { useEffect, useState } from "react";
 
 function compareDate(a: any, b: any) {
@@ -14,23 +14,27 @@ export function useMessagesByChat(
   const [messages, setMessages] = useState<any[]>([]);
   const [nextToken, setNextToken] = useState<any>(null);
 
-  const { data, loading } = useQuery(queries.LIST_MESSAGES, {
-    variables: {
-      chatId: id,
-      // limit: MESSAGES_PER_PAGE * page,
-      ...(nextToken &&
-        messages?.length &&
-        id === messages[0]?.chatId && { nextToken }),
-    },
-    skip: !id || !page,
-    fetchPolicy: "cache-and-network",
-  });
-  const { data: dataPush } = useSubscription(subscriptions.MESSAGE, {
-    variables: {
-      chatId: id,
-    },
-    skip: !id,
-  });
+  const data = {listMessages : []};
+  const loading = false;
+  // const { data, loading } = useQuery(queries.LIST_MESSAGES, {
+  //   variables: {
+  //     chatId: id,
+  //     // limit: MESSAGES_PER_PAGE * page,
+  //     ...(nextToken &&
+  //       messages?.length &&
+  //       id === messages[0]?.chatId && { nextToken }),
+  //   },
+  //   skip: !id || !page,
+  //   fetchPolicy: "cache-and-network",
+  // });
+
+  const dataPush = { onUpdateMessage:{objectId : 1}};
+  // const { data: dataPush } = useSubscription(subscriptions.MESSAGE, {
+  //   variables: {
+  //     chatId: id,
+  //   },
+  //   skip: !id,
+  // });
 
   useEffect(() => {
     if (page > 1) setNextToken(messages[messages.length - 1].createdAt);
