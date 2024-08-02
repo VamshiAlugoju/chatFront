@@ -1,8 +1,8 @@
-import { useQuery, useSubscription } from "@apollo/client";
-import { DirectMessagesContext } from "contexts/DirectMessagesContext";
-import * as queries from "graphql/queries";
-import * as subscriptions from "graphql/subscriptions";
-import useAuth from "hooks/useAuth";
+// import { useQuery, useSubscription } from "@apollo/client";
+import { DirectMessagesContext } from "../contexts/DirectMessagesContext";
+// import * as queries from "graphql/queries";
+// import * as subscriptions from "graphql/subscriptions";
+import useAuth from "../hooks/useAuth";
 import { useContext, useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 
@@ -15,20 +15,31 @@ export function useDirectMessagesByWorkspace() {
 
   const [directs, setDirects] = useState<any[]>([]);
 
-  const { data, loading } = useQuery(queries.LIST_DIRECTS, {
-    variables: {
-      workspaceId,
-    },
-    skip: !workspaceId,
-    fetchPolicy: "cache-and-network",
-  });
-  const { data: dataPush } = useSubscription(subscriptions.DIRECT, {
-    variables: {
-      workspaceId,
-    },
-    skip: !workspaceId,
-  });
+  // const { data, loading } = useQuery(queries.LIST_DIRECTS, {
+  //   variables: {
+  //     workspaceId,
+  //   },
+  //   skip: !workspaceId,
+  //   fetchPolicy: "cache-and-network",
+  // });
+  // const { data: dataPush } = useSubscription(subscriptions.DIRECT, {
+  //   variables: {
+  //     workspaceId,
+  //   },
+  //   skip: !workspaceId,
+  // });
 
+  //change
+
+  const data = {
+    listDirects: [],
+  };
+  const dataPush = {
+    onUpdateDirect: {
+      objectId: "lskf;l",
+    },
+  };
+  const loading = false;
   useEffect(() => {
     if (data) setDirects(data.listDirects);
   }, [data]);

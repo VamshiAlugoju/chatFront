@@ -1,15 +1,15 @@
 import { SearchIcon, TrashIcon, UserAddIcon } from "@heroicons/react/outline";
-import Spinner from "components/Spinner";
-import { useModal } from "contexts/ModalContext";
-import { useUser } from "contexts/UserContext";
-import { UsersContext } from "contexts/UsersContext";
-import { useWorkspaceById } from "hooks/useWorkspaces";
+import Spinner from "../../../components/Spinner";
+import { useModal } from "../../../contexts/ModalContext";
+import { useUser } from "../../../contexts/UserContext";
+import { UsersContext } from "../../../contexts/UsersContext";
+import { useWorkspaceById } from "../../../hooks/useWorkspaces";
 import { useContext, useMemo, useState } from "react";
 import toast from "react-hot-toast";
 import { useNavigate, useParams } from "react-router-dom";
-import { deleteData } from "utils/api-helpers";
-import classNames from "utils/classNames";
-import { getHref } from "utils/get-file-url";
+import { deleteData } from "../../../utils/api-helpers";
+import classNames from "../../../utils/classNames";
+import { getHref } from "../../../utils/get-file-url";
 
 function MemberItem({
   id,

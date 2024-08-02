@@ -1,22 +1,25 @@
 import { Dialog, Tab, Transition } from "@headlessui/react";
 import { PlusIcon, XIcon } from "@heroicons/react/outline";
-import ModalButton from "components/dashboard/ModalButton";
-import Spinner from "components/Spinner";
-import TextField from "components/TextField";
-import { WorkspacesSelectDropdown } from "components/WorkspacesDropdown";
-import { useModal } from "contexts/ModalContext";
-import { useTheme } from "contexts/ThemeContext";
-import { useUser } from "contexts/UserContext";
+import ModalButton from "../../../components/dashboard/ModalButton";
+import Spinner from "../../../components/Spinner";
+import TextField from "../../../components/TextField";
+import { WorkspacesSelectDropdown } from "../../../components/WorkspacesDropdown";
+import { useModal } from "../../../contexts/ModalContext";
+import { useTheme } from "../../../contexts/ThemeContext";
+import { useUser } from "../../../contexts/UserContext";
 import { Formik } from "formik";
-import { useMyWorkspaces, WorkspacesContext } from "hooks/useWorkspaces";
-import { TabLists } from "pages/dashboard/NewWorkspace";
+import {
+  useMyWorkspaces,
+  WorkspacesContext,
+} from "../../../hooks/useWorkspaces";
+import { TabLists } from "../../../pages/dashboard/NewWorkspace";
 import React, { Fragment, useContext, useRef } from "react";
 import toast from "react-hot-toast";
 import { useNavigate, useParams } from "react-router-dom";
-import { postData } from "utils/api-helpers";
-import classNames from "utils/classNames";
-import { getHref } from "utils/get-file-url";
-import wait from "utils/wait";
+import { postData } from "../../../utils/api-helpers";
+import classNames from "../../../utils/classNames";
+import { getHref } from "../../../utils/get-file-url";
+import wait from "../../../utils/wait";
 import * as Yup from "yup";
 
 function CreateWorkspace() {

@@ -1,18 +1,18 @@
-import CancelButton from "components/CancelButton";
-import ConfirmationModal from "components/ConfirmationModal";
-import ModalButton from "components/dashboard/ModalButton";
-import TextField from "components/TextField";
-import { useModal } from "contexts/ModalContext";
-import { useUser } from "contexts/UserContext";
+import CancelButton from "../../../components/CancelButton";
+import ConfirmationModal from "../../../components/ConfirmationModal";
+import ModalButton from "../../../components/dashboard/ModalButton";
+import TextField from "../../../components/TextField";
+import { useModal } from "../../../contexts/ModalContext";
+import { useUser } from "../../../contexts/UserContext";
 import { Formik } from "formik";
-import { uploadFile } from "gqlite-lib/dist/client/storage";
-import { useMyWorkspaces } from "hooks/useWorkspaces";
+// import { uploadFile } from "gqlite-lib/dist/client/storage";
+import { useMyWorkspaces } from "../../../hooks/useWorkspaces";
 import { useEffect, useRef, useState } from "react";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
-import { deleteData, postData } from "utils/api-helpers";
-import { getHref } from "utils/get-file-url";
-import now from "utils/now";
+import { deleteData, postData } from "../../../utils/api-helpers";
+import { getHref } from "../../../utils/get-file-url";
+import now from "../../../utils/now";
 
 export default function SettingsSection({ workspace }: { workspace: any }) {
   const [photo, setPhoto] = useState<any>(null);
@@ -43,11 +43,13 @@ export default function SettingsSection({ workspace }: { workspace: any }) {
 
   const handleSavePicture = async () => {
     try {
-      const path = await uploadFile(
-        "messenger",
-        `Workspace/${workspace.objectId}/${now()}_photo`,
-        photo!
-      );
+      // const path = await uploadFile(
+      //   "messenger",
+      //   `Workspace/${workspace.objectId}/${now()}_photo`,
+      //   photo!
+      // );
+      //change
+      const path = "";
       return path;
     } catch (err) {
       console.error(err);

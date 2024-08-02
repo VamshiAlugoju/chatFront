@@ -1,18 +1,18 @@
-import QuillEditor from "components/dashboard/quill/QuillEditor";
-import { MESSAGE_MAX_CHARACTERS } from "config";
-import { useUser } from "contexts/UserContext";
+import QuillEditor from "../../../components/dashboard/quill/QuillEditor";
+import { MESSAGE_MAX_CHARACTERS } from "../../../config";
+import { useUser } from "../../../contexts/UserContext";
 import { Formik } from "formik";
-import { uploadFile } from "gqlite-lib/dist/client/storage";
-import { useChannelById } from "hooks/useChannels";
-import { useDirectMessageById } from "hooks/useDirects";
-import { useUserById } from "hooks/useUsers";
+// import { uploadFile } from "gqlite-lib/dist/client/storage";
+import { useChannelById } from "../../../hooks/useChannels";
+import { useDirectMessageById } from "../../../hooks/useDirects";
+import { useUserById } from "../../../hooks/useUsers";
 import { useEffect, useRef, useState } from "react";
 import { useDropzone } from "react-dropzone";
 import toast from "react-hot-toast";
 import { useParams } from "react-router-dom";
-import { postData } from "utils/api-helpers";
-import classNames from "utils/classNames";
-import now from "utils/now";
+import { postData } from "../../../utils/api-helpers";
+import classNames from "../../../utils/classNames";
+import now from "../../../utils/now";
 import { v4 as uuidv4 } from "uuid";
 
 function TypingUser({ userId }: { userId: string }) {
@@ -147,11 +147,12 @@ export default function Editor() {
 
               let filePath: string | undefined;
               if (files?.length) {
-                filePath = await uploadFile(
-                  "messenger",
-                  `Message/${messageId}/${now()}_file`,
-                  files[0]
-                );
+                // filePath = await uploadFile(
+                //   "messenger",
+                //   `Message/${messageId}/${now()}_file`,
+                //   files[0]
+                // );
+                //change
               }
 
               await postData("/messages", {

@@ -1,8 +1,8 @@
-import { useQuery, useSubscription } from "@apollo/client";
-import { ChannelsContext } from "contexts/ChannelsContext";
-import * as queries from "graphql/queries";
-import * as subscriptions from "graphql/subscriptions";
-import useAuth from "hooks/useAuth";
+// import { useQuery, useSubscription } from "@apollo/client";
+import { ChannelsContext } from "../contexts/ChannelsContext";
+// import * as queries from "../graphql/queries";
+// import * as subscriptions from "../graphql/subscriptions";
+import useAuth from "../hooks/useAuth";
 import { useContext, useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 
@@ -24,19 +24,30 @@ export function useChannelsByWorkspace() {
 
   const [channels, setChannels] = useState<any[]>([]);
 
-  const { data, loading } = useQuery(queries.LIST_CHANNELS, {
-    variables: {
-      workspaceId,
+  // const { data, loading } = useQuery(queries.LIST_CHANNELS, {
+  //   variables: {
+  //     workspaceId,
+  //   },
+  //   skip: !workspaceId,
+  //   fetchPolicy: "cache-and-network",
+  // });
+  // const { data: dataPush } = useSubscription(subscriptions.CHANNEL, {
+  //   variables: {
+  //     workspaceId,
+  //   },
+  //   skip: !workspaceId,
+  // });
+
+  const loading = false;
+  const data = {
+    listChannels: [],
+  };
+  const dataPush = {
+    onUpdateChannel: {
+      objectId: "lkds",
     },
-    skip: !workspaceId,
-    fetchPolicy: "cache-and-network",
-  });
-  const { data: dataPush } = useSubscription(subscriptions.CHANNEL, {
-    variables: {
-      workspaceId,
-    },
-    skip: !workspaceId,
-  });
+  };
+  //change
 
   useEffect(() => {
     if (data) setChannels(data.listChannels);

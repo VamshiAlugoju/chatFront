@@ -1,10 +1,10 @@
 import { Listbox, Transition } from "@headlessui/react";
 import { EmojiHappyIcon } from "@heroicons/react/outline";
-import { reactions } from "lib/reactions";
+import { reactions } from "../lib/reactions";
 import { Fragment, useEffect, useState } from "react";
 import toast from "react-hot-toast";
-import { postData } from "utils/api-helpers";
-import classNames from "utils/classNames";
+import { postData } from "../utils/api-helpers";
+import classNames from "../utils/classNames";
 
 export function ReactionModal({
   messageId,

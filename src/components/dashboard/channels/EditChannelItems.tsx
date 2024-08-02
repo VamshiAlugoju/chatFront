@@ -1,5 +1,5 @@
 import EditChannelItemsDialog from "./EditChannelItemsDialog";
-import { useTheme } from "contexts/ThemeContext";
+import { useTheme } from "../../../contexts/ThemeContext";
 import React, { useState } from "react";
 import classNames from "../../../utils/classNames";
 

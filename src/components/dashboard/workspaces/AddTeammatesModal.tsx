@@ -1,14 +1,14 @@
 import { Dialog, Transition } from "@headlessui/react";
 import { XIcon } from "@heroicons/react/outline";
-import ModalButton from "components/dashboard/ModalButton";
-import TextField from "components/TextField";
-import { useModal } from "contexts/ModalContext";
-import { useTheme } from "contexts/ThemeContext";
+import ModalButton from "../../../components/dashboard/ModalButton";
+import TextField from "../../../components/TextField";
+import { useModal } from "../../../contexts/ModalContext";
+import { useTheme } from "../../../contexts/ThemeContext";
 import { Formik } from "formik";
 import { Fragment, useRef } from "react";
 import toast from "react-hot-toast";
 import { useParams } from "react-router-dom";
-import { postData } from "utils/api-helpers";
+import { postData } from "../../../utils/api-helpers";
 import * as Yup from "yup";
 
 export default function AddTeammatesModal() {

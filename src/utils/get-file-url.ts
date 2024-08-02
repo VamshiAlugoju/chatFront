@@ -1,6 +1,8 @@
-import { getFileURL } from "gqlite-lib/dist/client/storage";
+// import { getFileURL } from "gqlite-lib/dist/client/storage";
 
 export function getHref(url: string) {
   if (!url) return undefined;
-  else return getFileURL(url);
+  // else return getFileURL(url);
+  //change
+  return "";
 }

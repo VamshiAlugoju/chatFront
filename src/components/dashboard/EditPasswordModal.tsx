@@ -1,12 +1,12 @@
 import { Dialog, Transition } from "@headlessui/react";
 import { XIcon } from "@heroicons/react/outline";
-import CancelButton from "components/CancelButton";
-import ModalButton from "components/dashboard/ModalButton";
-import TextField from "components/TextField";
-import { useModal } from "contexts/ModalContext";
+import CancelButton from "../../components/CancelButton";
+import ModalButton from "../../components/dashboard/ModalButton";
+import TextField from "../../components/TextField";
+import { useModal } from "../../contexts/ModalContext";
 import { Formik } from "formik";
-import { updateUser } from "gqlite-lib/dist/client/auth";
-import useAuth from "hooks/useAuth";
+// import { updateUser } from "gqlite-lib/dist/client/auth";
+import useAuth from "../../hooks/useAuth";
 import { Fragment, useRef } from "react";
 import toast from "react-hot-toast";
 
@@ -81,7 +81,8 @@ export default function EditPasswordModal() {
                   try {
                     if (newPassword !== newPasswordConfirm)
                       throw new Error("Passwords do not match");
-                    await updateUser(user.uid, { password: newPassword });
+                    // await updateUser(user.uid, { password: newPassword });
+                    //change
                     setOpen(false);
                   } catch (err: any) {
                     toast.error(err.message);

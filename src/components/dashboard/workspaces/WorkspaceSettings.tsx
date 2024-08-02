@@ -1,11 +1,11 @@
 import { Dialog, RadioGroup, Transition } from "@headlessui/react";
 import { XIcon } from "@heroicons/react/outline";
-import MembersSection from "components/dashboard/workspaces/MembersSection";
-import SettingsSection from "components/dashboard/workspaces/SettingsSection";
-import { useModal } from "contexts/ModalContext";
-import { useTheme } from "contexts/ThemeContext";
+import MembersSection from "../../../components/dashboard/workspaces/MembersSection";
+import SettingsSection from "../../../components/dashboard/workspaces/SettingsSection";
+import { useModal } from "../../../contexts/ModalContext";
+import { useTheme } from "../../../contexts/ThemeContext";
 import { Fragment, useEffect } from "react";
-import classNames from "utils/classNames";
+import classNames from "../../../utils/classNames";
 
 export default function WorkspaceSettings({ workspace }: { workspace: any }) {
   const { themeColors } = useTheme();

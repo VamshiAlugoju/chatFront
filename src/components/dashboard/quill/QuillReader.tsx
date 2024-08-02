@@ -1,11 +1,11 @@
-import Style from "components/Style";
-import { useTheme } from "contexts/ThemeContext";
-import { useForceUpdate } from "lib/hooks";
+import Style from "../../../components/Style";
+import { useTheme } from "../../../contexts/ThemeContext";
+import { useForceUpdate } from "../../../lib/hooks";
 import { useEffect, useRef } from "react";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.bubble.css";
-import classNames from "utils/classNames";
-import hexToRgbA from "utils/hexToRgbA";
+import classNames from "../../../utils/classNames";
+import hexToRgbA from "../../../utils/hexToRgbA";
 
 export default function Reader({
   text,

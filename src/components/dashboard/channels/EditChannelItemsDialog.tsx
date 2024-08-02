@@ -5,7 +5,7 @@ import CancelButton from "../../CancelButton";
 import ModalButton from "../../dashboard/ModalButton";
 import TextArea from "../../TextArea";
 import TextField from "../../TextField";
-import { useTheme } from "contexts/ThemeContext";
+import { useTheme } from "../../../contexts/ThemeContext";
 import { Formik } from "formik";
 import { useChannelById } from "../../../hooks/useChannels";
 import React, { Fragment, useRef } from "react";

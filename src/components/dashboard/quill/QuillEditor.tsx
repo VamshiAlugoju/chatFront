@@ -7,13 +7,13 @@ import {
   XIcon,
 } from "@heroicons/react/outline";
 import { PaperAirplaneIcon } from "@heroicons/react/solid";
-import Spinner from "components/Spinner";
-import Style from "components/Style";
-import { MESSAGE_MAX_CHARACTERS, STICKERS_COUNT } from "config";
-import { useTheme } from "contexts/ThemeContext";
+import Spinner from "../../../components/Spinner";
+import Style from "../../../components/Style";
+import { MESSAGE_MAX_CHARACTERS, STICKERS_COUNT } from "../../../config";
+import { useTheme } from "../../../contexts/ThemeContext";
 import { Picker } from "emoji-mart";
-import "emoji-mart/css/emoji-mart.css";
-import { ReactComponent as AttachFileIcon } from "icons/attach_file.svg";
+// import "emoji-mart/css/emoji-mart.css";
+// import { ReactComponent as AttachFileIcon } from "*.svg";
 import debounce from "lodash/debounce";
 import React, { useCallback, useEffect, useMemo, useState } from "react";
 import { DropzoneState } from "react-dropzone";
@@ -21,9 +21,9 @@ import toast from "react-hot-toast";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import { useParams } from "react-router-dom";
-import { postData } from "utils/api-helpers";
-import classNames from "utils/classNames";
-import hexToRgbA from "utils/hexToRgbA";
+import { postData } from "../../../utils/api-helpers";
+import classNames from "../../../utils/classNames";
+import hexToRgbA from "../../../utils/hexToRgbA";
 
 function EmojiDropdown({
   onEmojiClick,
@@ -223,12 +223,12 @@ function CustomToolbar({
       <div className="ml-auto flex items-center space-x-2">
         <StickersDropdown />
         <EmojiDropdown onEmojiClick={onEmojiClick} editor={editor} />
-        <AttachFileIcon
+        {/* <AttachFileIcon
           className="h-5 w-5 cursor-pointer th-color-for"
           onClick={() => {
             openDropzone();
           }}
-        />
+        /> */}
         <button
           id="sendButton"
           type="submit"

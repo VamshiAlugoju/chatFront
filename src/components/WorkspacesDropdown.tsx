@@ -1,8 +1,8 @@
 import { Listbox, Transition } from "@headlessui/react";
-import { CheckIcon, SelectorIcon } from "@heroicons/react/solid";
+// import { CheckIcon, SelectorIcon } from "@heroicons/react/solid";
 import { Fragment } from "react";
-import classNames from "utils/classNames";
-import { getHref } from "utils/get-file-url";
+import classNames from "../utils/classNames";
+import { getHref } from "../utils/get-file-url";
 
 export function WorkspacesSelectDropdown({
   workspaces,
@@ -71,7 +71,7 @@ export function WorkspacesDropdown({
             </span>
           </span>
           <span className="ml-3 absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none">
-            <SelectorIcon className="h-5 w-5 th-color-for" aria-hidden="true" />
+            {/* <SelectorIcon className="h-5 w-5 th-color-for" aria-hidden="true" /> */}
           </span>
         </Listbox.Button>
 
@@ -123,7 +123,7 @@ export function WorkspacesDropdown({
                             "absolute inset-y-0 right-0 flex items-center pr-4"
                           )}
                         >
-                          <CheckIcon className="h-5 w-5" aria-hidden="true" />
+                          {/* <CheckIcon className="h-5 w-5" aria-hidden="true" /> */}
                         </span>
                       ) : null}
                     </>

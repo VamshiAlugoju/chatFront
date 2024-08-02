@@ -5,20 +5,20 @@ import {
   PlusIcon,
   XIcon,
 } from "@heroicons/react/outline";
-import ModalButton from "components/dashboard/ModalButton";
-import TextField from "components/TextField";
-import { useModal } from "contexts/ModalContext";
-import { useTheme } from "contexts/ThemeContext";
-import { useUser } from "contexts/UserContext";
+import ModalButton from "../../../components/dashboard/ModalButton";
+import TextField from "../../../components/TextField";
+import { useModal } from "../../../contexts/ModalContext";
+import { useTheme } from "../../../contexts/ThemeContext";
+import { useUser } from "../../../contexts/UserContext";
 import { Formik } from "formik";
-import { useChannelById, useChannels } from "hooks/useChannels";
-import { useDetailByChat } from "hooks/useDetails";
-import { ReactComponent as ArrowIcon } from "icons/arrow.svg";
+import { useChannelById, useChannels } from "../../../hooks/useChannels";
+import { useDetailByChat } from "../../../hooks/useDetails";
+// import { ReactComponent as ArrowIcon } from "icons/arrow.svg";
 import { Fragment, useRef } from "react";
 import toast from "react-hot-toast";
 import { useNavigate, useParams } from "react-router-dom";
-import { postData } from "utils/api-helpers";
-import classNames from "utils/classNames";
+import { postData } from "../../../utils/api-helpers";
+import classNames from "../../../utils/classNames";
 import * as Yup from "yup";
 
 function CreateChannel() {
@@ -292,14 +292,14 @@ export default function Channels() {
           <>
             <Disclosure.Button className="flex justify-between items-center px-4 cursor-pointer">
               <div className="flex items-center">
-                <ArrowIcon
+                {/* <ArrowIcon
                   className={`h-4 w-4 mr-2 ${
                     open ? "transform rotate-90" : ""
                   }`}
                   style={{
                     color: themeColors?.foreground,
                   }}
-                />
+                /> */}
                 <h5
                   style={{
                     color: themeColors?.foreground,

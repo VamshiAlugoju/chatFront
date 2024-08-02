@@ -1,4 +1,4 @@
-import classNames from "utils/classNames";
+import classNames from "../utils/classNames";
 
 export default function Spinner({ className }: { className?: string }) {
   return (

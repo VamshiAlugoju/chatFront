@@ -1,18 +1,18 @@
 import { ChevronDownIcon } from "@heroicons/react/outline";
-import EditChannel from "components/dashboard/channels/EditChannel";
-import Editor from "components/dashboard/chat/Editor";
-import Messages from "components/dashboard/chat/Messages";
-import { useTheme } from "contexts/ThemeContext";
-import { useUser } from "contexts/UserContext";
-import { useChannelById } from "hooks/useChannels";
-import { useDetailByChat } from "hooks/useDetails";
-import { useDirectMessageById } from "hooks/useDirects";
-import { useUserById } from "hooks/useUsers";
+import EditChannel from "../../components/dashboard/channels/EditChannel";
+import Editor from "../../components/dashboard/chat/Editor";
+import Messages from "../../components/dashboard/chat/Messages";
+import { useTheme } from "../../contexts/ThemeContext";
+import { useUser } from "../../contexts/UserContext";
+import { useChannelById } from "../../hooks/useChannels";
+import { useDetailByChat } from "../../hooks/useDetails";
+import { useDirectMessageById } from "../../hooks/useDirects";
+import { useUserById } from "../../hooks/useUsers";
 import { useEffect, useState } from "react";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import styled from "styled-components";
-import { postData } from "utils/api-helpers";
-import { getHref } from "utils/get-file-url";
+import { postData } from "../../utils/api-helpers";
+import { getHref } from "../../utils/get-file-url";
 
 const SelectChannel = styled.button`
   :hover {

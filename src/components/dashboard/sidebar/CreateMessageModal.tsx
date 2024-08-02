@@ -1,11 +1,11 @@
 import { Dialog, RadioGroup, Transition } from "@headlessui/react";
 import { XIcon } from "@heroicons/react/outline";
-import ChannelsSection from "components/dashboard/sidebar/ChannelsSection";
-import TeammatesSection from "components/dashboard/sidebar/TeammatesSection";
-import { useModal } from "contexts/ModalContext";
-import { useTheme } from "contexts/ThemeContext";
+import ChannelsSection from "../../../components/dashboard/sidebar/ChannelsSection";
+import TeammatesSection from "../../../components/dashboard/sidebar/TeammatesSection";
+import { useModal } from "../../../contexts/ModalContext";
+import { useTheme } from "../../../contexts/ThemeContext";
 import { Fragment, useRef } from "react";
-import classNames from "utils/classNames";
+import classNames from "../../../utils/classNames";
 
 export default function CreateMessageModal() {
   const { themeColors } = useTheme();

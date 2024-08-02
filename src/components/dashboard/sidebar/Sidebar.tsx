@@ -1,17 +1,17 @@
 import { Menu, Transition } from "@headlessui/react";
 import { ChevronDownIcon } from "@heroicons/react/outline";
-import Preferences from "components/dashboard/navbar/Preferences";
-import Channels from "components/dashboard/sidebar/Channels";
-import CreateMessageModal from "components/dashboard/sidebar/CreateMessageModal";
-import DirectMessages from "components/dashboard/sidebar/DirectMessages";
-import WorkspaceSettings from "components/dashboard/workspaces/WorkspaceSettings";
-import Spinner from "components/Spinner";
-import { useModal } from "contexts/ModalContext";
-import { useWorkspaceById } from "hooks/useWorkspaces";
+import Preferences from "../../../components/dashboard/navbar/Preferences";
+import Channels from "../../../components/dashboard/sidebar/Channels";
+import CreateMessageModal from "../../../components/dashboard/sidebar/CreateMessageModal";
+import DirectMessages from "../../../components/dashboard/sidebar/DirectMessages";
+import WorkspaceSettings from "../../../components/dashboard/workspaces/WorkspaceSettings";
+import Spinner from "../../../components/Spinner";
+import { useModal } from "../../../contexts/ModalContext";
+import { useWorkspaceById } from "../../../hooks/useWorkspaces";
 import { Fragment } from "react";
 import { useParams } from "react-router-dom";
-import classNames from "utils/classNames";
-import { getHref } from "utils/get-file-url";
+import classNames from "../../../utils/classNames";
+import { getHref } from "../../../utils/get-file-url";
 
 function WorkspaceDropdownItem({
   setOpen,

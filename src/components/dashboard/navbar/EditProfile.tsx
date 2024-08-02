@@ -1,17 +1,17 @@
-import { Dialog, Transition } from "@headlessui/react";
+import { Dialog, Transition, TransitionChild } from "@headlessui/react";
 import { XIcon } from "@heroicons/react/outline";
-import CancelButton from "components/CancelButton";
-import ModalButton from "components/dashboard/ModalButton";
-import TextField from "components/TextField";
-import { APP_NAME } from "config";
-import { useUser } from "contexts/UserContext";
+import CancelButton from "../../../components/CancelButton";
+import ModalButton from "../../../components/dashboard/ModalButton";
+import TextField from "../../../components/TextField";
+import { APP_NAME } from "../../../config";
+import { useUser } from "../../../contexts/UserContext";
 import { Formik } from "formik";
-import { uploadFile } from "gqlite-lib/dist/client/storage";
+// import { uploadFile } from "gqlite-lib/dist/client/storage";
 import React, { Fragment, useEffect, useRef, useState } from "react";
 import toast from "react-hot-toast";
-import { postData } from "utils/api-helpers";
-import { getHref } from "utils/get-file-url";
-import now from "utils/now";
+import { postData } from "../../../utils/api-helpers";
+import { getHref } from "../../../utils/get-file-url";
+import now from "../../../utils/now";
 
 export default function EditProfile({
   open,
@@ -42,12 +42,14 @@ export default function EditProfile({
 
   const handleSavePicture = async () => {
     try {
-      const path = await uploadFile(
-        "messenger",
-        `User/${userdata.objectId}/${now()}_photo`,
-        photo!
-      );
-      return path;
+      // const path = await uploadFile(
+      //   "messenger",
+      //   `User/${userdata.objectId}/${now()}_photo`,
+      //   photo!
+      // );
+      // return path;
+      //change
+      return "";
     } catch (err: any) {
       console.error(err);
       return "";
@@ -76,7 +78,7 @@ export default function EditProfile({
         onClose={setOpen}
       >
         <div className="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
-          <Transition.Child
+          <TransitionChild
             as={Fragment}
             enter="ease-out duration-300"
             enterFrom="opacity-0"
@@ -86,7 +88,7 @@ export default function EditProfile({
             leaveTo="opacity-0"
           >
             <Dialog.Overlay className="fixed inset-0 bg-gray-900 bg-opacity-50 transition-opacity" />
-          </Transition.Child>
+          </TransitionChild>
 
           {/* This element is to trick the browser into centering the modal contents. */}
           <span
@@ -95,7 +97,7 @@ export default function EditProfile({
           >
             &#8203;
           </span>
-          <Transition.Child
+          <TransitionChild
             as={Fragment}
             enter="ease-out duration-300"
             enterFrom="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
@@ -237,7 +239,7 @@ export default function EditProfile({
                 )}
               </Formik>
             </div>
-          </Transition.Child>
+          </TransitionChild>
         </div>
       </Dialog>
     </Transition.Root>

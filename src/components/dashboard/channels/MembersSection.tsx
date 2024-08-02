@@ -2,8 +2,8 @@
 import { SearchIcon, TrashIcon, UserAddIcon } from "@heroicons/react/outline";
 import AddPeopleToChannelDialog from "./AddPeopleToChannelDialog";
 import Spinner from "../../Spinner";
-import { useUser } from "contexts/UserContext";
-import { UsersContext } from "contexts/UsersContext";
+import { useUser } from "../../../contexts/UserContext";
+import { UsersContext } from "../../../contexts/UsersContext";
 import { useChannelById } from "../../../hooks/useChannels";
 import { useWorkspaceById } from "../../../hooks/useWorkspaces";
 import { useContext, useMemo, useState } from "react";

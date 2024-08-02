@@ -1,16 +1,16 @@
 import { SearchIcon, UserAddIcon } from "@heroicons/react/outline";
-import ModalButton from "components/dashboard/ModalButton";
-import { DirectMessagesContext } from "contexts/DirectMessagesContext";
-import { useModal } from "contexts/ModalContext";
-import { useTheme } from "contexts/ThemeContext";
-import { useUser } from "contexts/UserContext";
-import { UsersContext } from "contexts/UsersContext";
-import { useWorkspaceById } from "hooks/useWorkspaces";
+import ModalButton from "../../../components/dashboard/ModalButton";
+import { DirectMessagesContext } from "../../../contexts/DirectMessagesContext";
+import { useModal } from "../../../contexts/ModalContext";
+import { useTheme } from "../../../contexts/ThemeContext";
+import { useUser } from "../../../contexts/UserContext";
+import { UsersContext } from "../../../contexts/UsersContext";
+import { useWorkspaceById } from "../../../hooks/useWorkspaces";
 import { useContext, useEffect, useMemo, useState } from "react";
 import toast from "react-hot-toast";
 import { useNavigate, useParams } from "react-router-dom";
-import { postData } from "utils/api-helpers";
-import { getHref } from "utils/get-file-url";
+import { postData } from "../../../utils/api-helpers";
+import { getHref } from "../../../utils/get-file-url";
 
 function MemberItem({
   id,

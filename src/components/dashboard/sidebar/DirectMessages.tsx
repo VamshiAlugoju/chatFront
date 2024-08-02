@@ -1,21 +1,21 @@
 import { Disclosure } from "@headlessui/react";
 import { DotsHorizontalIcon, PlusIcon, XIcon } from "@heroicons/react/outline";
-import AddTeammatesModal from "components/dashboard/workspaces/AddTeammatesModal";
-import Spinner from "components/Spinner";
-import { DirectMessagesContext } from "contexts/DirectMessagesContext";
-import { useModal } from "contexts/ModalContext";
-import { useTheme } from "contexts/ThemeContext";
-import { useUser } from "contexts/UserContext";
-import { useDetailByChat } from "hooks/useDetails";
-import { usePresenceByUserId } from "hooks/usePresence";
-import { useUserById } from "hooks/useUsers";
-import { ReactComponent as ArrowIcon } from "icons/arrow.svg";
+import AddTeammatesModal from "../../../components/dashboard/workspaces/AddTeammatesModal";
+import Spinner from "../../../components/Spinner";
+import { DirectMessagesContext } from "../../../contexts/DirectMessagesContext";
+import { useModal } from "../../../contexts/ModalContext";
+import { useTheme } from "../../../contexts/ThemeContext";
+import { useUser } from "../../../contexts/UserContext";
+import { useDetailByChat } from "../../../hooks/useDetails";
+import { usePresenceByUserId } from "../../../hooks/usePresence";
+import { useUserById } from "../../../hooks/useUsers";
+// import { ReactComponent as ArrowIcon } from "icons/arrow.svg";
 import { useContext, useState } from "react";
 import toast from "react-hot-toast";
 import { useNavigate, useParams } from "react-router-dom";
-import { postData } from "utils/api-helpers";
-import classNames from "utils/classNames";
-import { getHref } from "utils/get-file-url";
+import { postData } from "../../../utils/api-helpers";
+import classNames from "../../../utils/classNames";
+import { getHref } from "../../../utils/get-file-url";
 
 function DirectMessage({ dm }: { dm: any }) {
   const { themeColors } = useTheme();
@@ -190,7 +190,7 @@ export default function DirectMessages() {
           <>
             <Disclosure.Button className="flex justify-between items-center px-4 cursor-pointer">
               <div className="flex items-center">
-                <ArrowIcon
+                {/* <ArrowIcon
                   className={classNames(
                     open ? "transform rotate-90" : "",
                     "h-4 w-4 mr-2"
@@ -198,7 +198,7 @@ export default function DirectMessages() {
                   style={{
                     color: themeColors?.foreground,
                   }}
-                />
+                /> */}
                 <h5 className="th-color-for">Direct messages</h5>
               </div>
             </Disclosure.Button>

@@ -1,23 +1,23 @@
 import { DocumentTextIcon, DownloadIcon } from "@heroicons/react/outline";
 import { PencilIcon, TrashIcon } from "@heroicons/react/solid";
-import EditMessage from "components/dashboard/chat/EditMessage";
-import QuillReader from "components/dashboard/quill/QuillReader";
-import { ReactionModal } from "components/ReactionModal";
-import Spinner from "components/Spinner";
-import { useReactions } from "contexts/ReactionsContext";
-import { useTheme } from "contexts/ThemeContext";
-import { useUser } from "contexts/UserContext";
-import { useUserById } from "hooks/useUsers";
-import { reactions } from "lib/reactions";
+import EditMessage from "../../../components/dashboard/chat/EditMessage";
+import QuillReader from "../../../components/dashboard/quill/QuillReader";
+import { ReactionModal } from "../../../components/ReactionModal";
+import Spinner from "../../../components/Spinner";
+import { useReactions } from "../../../contexts/ReactionsContext";
+import { useTheme } from "../../../contexts/ThemeContext";
+import { useUser } from "../../../contexts/UserContext";
+import { useUserById } from "../../../hooks/useUsers";
+import { reactions } from "../../../lib/reactions";
 import React, { useMemo, useRef, useState } from "react";
 import toast from "react-hot-toast";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import styled from "styled-components";
-import { deleteData } from "utils/api-helpers";
-import bytesToSize from "utils/bytesToSize";
-import classNames from "utils/classNames";
-import { getHref } from "utils/get-file-url";
-import hexToRgbA from "utils/hexToRgbA";
+import { deleteData } from "../../../utils/api-helpers";
+import bytesToSize from "../../../utils/bytesToSize";
+import classNames from "../../../utils/classNames";
+import { getHref } from "../../../utils/get-file-url";
+import hexToRgbA from "../../../utils/hexToRgbA";
 
 const MessageDiv = styled.div`
   :hover {
@@ -427,7 +427,7 @@ export default function Message({
   return (
     <div className="w-full first:mb-4 last:mt-4">
       {children}
-
+      {/* 
       <MessageDiv
         theme={themeColors}
         className={classNames(
@@ -442,7 +442,7 @@ export default function Message({
           {messageRender}
           {!edit && <Reactions groupedReactions={groupedReactions} />}
         </div>
-      </MessageDiv>
+      </MessageDiv> */}
     </div>
   );
 }

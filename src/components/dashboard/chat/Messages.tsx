@@ -1,10 +1,10 @@
-import Message from "components/dashboard/chat/Message";
-import Spinner from "components/Spinner";
-import { MESSAGES_PER_PAGE } from "config";
-import { useUser } from "contexts/UserContext";
-import { useChannelById } from "hooks/useChannels";
-import { useDirectMessageById } from "hooks/useDirects";
-import { useMessagesByChat } from "hooks/useMessages";
+import Message from "../../../components/dashboard/chat/Message";
+import Spinner from "../../../components/Spinner";
+import { MESSAGES_PER_PAGE } from "../../../config";
+import { useUser } from "../../../contexts/UserContext";
+import { useChannelById } from "../../../hooks/useChannels";
+import { useDirectMessageById } from "../../../hooks/useDirects";
+import { useMessagesByChat } from "../../../hooks/useMessages";
 import { useEffect, useMemo, useState } from "react";
 import { useInView } from "react-intersection-observer";
 import { useParams } from "react-router-dom";

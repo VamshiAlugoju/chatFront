@@ -1,5 +1,5 @@
-import { getAPIUrl } from "config";
-import { getIdToken } from "gqlite-lib/dist/client/auth";
+import { getAPIUrl } from "../config";
+// import { getIdToken } from "gqlite-lib/dist/client/auth";
 
 interface IError {
   error: {
@@ -13,7 +13,9 @@ export const fetcher = async (url: string) => {
   const headers: any = {
     "Content-Type": "application/json",
   };
-  const idToken = await getIdToken();
+  // const idToken = await getIdToken();
+  //change
+  const idToken = localStorage.getItem("token");
   if (idToken) {
     headers.Authorization = `Bearer ${idToken}`;
   }
@@ -40,7 +42,9 @@ export const postData = async (
     "Content-Type": "application/json",
     ...addHeaders,
   };
-  const idToken = await getIdToken();
+  // const idToken = await getIdToken();
+  //change
+  const idToken = localStorage.getItem("token");
   if (idToken) {
     headers.Authorization = `Bearer ${idToken}`;
   }
@@ -67,7 +71,9 @@ export const deleteData = async (url: string, addHeaders?: {}) => {
     "Content-Type": "application/json",
     ...addHeaders,
   };
-  const idToken = await getIdToken();
+  // const idToken = await getIdToken();
+  //change
+  const idToken = localStorage.getItem("token");
   if (idToken) {
     headers.Authorization = `Bearer ${idToken}`;
   }

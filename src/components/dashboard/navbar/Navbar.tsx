@@ -1,16 +1,16 @@
 import { Menu, Transition } from "@headlessui/react";
 import { SearchIcon } from "@heroicons/react/outline";
-import EditPasswordModal from "components/dashboard/EditPasswordModal";
-import EditProfile from "components/dashboard/navbar/EditProfile";
-import { useModal } from "contexts/ModalContext";
-import { useTheme } from "contexts/ThemeContext";
-import { useUser } from "contexts/UserContext";
+import EditPasswordModal from "../../../components/dashboard/EditPasswordModal";
+import EditProfile from "../../../components/dashboard/navbar/EditProfile";
+import { useModal } from "../../../contexts/ModalContext";
+import { useTheme } from "../../../contexts/ThemeContext";
+import { useUser } from "../../../contexts/UserContext";
 import { Fragment, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import classNames from "utils/classNames";
-import { getHref } from "utils/get-file-url";
-import hexToRgbA from "utils/hexToRgbA";
+import classNames from "../../../utils/classNames";
+import { getHref } from "../../../utils/get-file-url";
+import hexToRgbA from "../../../utils/hexToRgbA";
 
 function NavbarItem({ onClick, text }: { onClick: any; text: string }) {
   return (
@@ -73,11 +73,12 @@ export default function Navbar() {
             className="h-4 w-4 mr-2"
             style={{ color: hexToRgbA(themeColors?.brightWhite, "0.8")! }}
           />
-          <SearchInput
+          {/* <SearchInput
             theme={themeColors}
             className="w-full bg-transparent th-color-brwhite border-0 focus:outline-none"
             placeholder="Search"
-          />
+          /> */}
+          {/* change */}
         </div>
       </div>
       <div className="flex items-center justify-end col-span-1">

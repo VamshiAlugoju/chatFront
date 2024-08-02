@@ -3,16 +3,16 @@ import {
   PlusCircleIcon,
   SearchIcon,
 } from "@heroicons/react/outline";
-import ModalButton from "components/dashboard/ModalButton";
-import Spinner from "components/Spinner";
-import { ChannelsContext } from "contexts/ChannelsContext";
-import { useModal } from "contexts/ModalContext";
-import { useUser } from "contexts/UserContext";
-import { useWorkspaceById } from "hooks/useWorkspaces";
+import ModalButton from "../../../components/dashboard/ModalButton";
+import Spinner from "../../../components/Spinner";
+import { ChannelsContext } from "../../../contexts/ChannelsContext";
+import { useModal } from "../../../contexts/ModalContext";
+import { useUser } from "../../../contexts/UserContext";
+import { useWorkspaceById } from "../../../hooks/useWorkspaces";
 import { useContext, useMemo, useState } from "react";
 import toast from "react-hot-toast";
 import { useNavigate, useParams } from "react-router-dom";
-import { postData } from "utils/api-helpers";
+import { postData } from "../../../utils/api-helpers";
 
 function ChannelItem({ channel }: { channel: any }) {
   const { user } = useUser();

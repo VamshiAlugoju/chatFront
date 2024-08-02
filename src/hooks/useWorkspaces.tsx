@@ -1,7 +1,7 @@
-import { useQuery, useSubscription } from "@apollo/client";
-import { useUser } from "contexts/UserContext";
-import * as queries from "graphql/queries";
-import * as subscriptions from "graphql/subscriptions";
+// import { useQuery, useSubscription } from "@apollo/client";
+import { useUser } from "../contexts/UserContext";
+// import * as queries from "graphql/queries";
+// import * as subscriptions from "graphql/subscriptions";
 import React, { createContext, useContext, useEffect, useState } from "react";
 
 export const WorkspacesContext = createContext({
@@ -33,29 +33,40 @@ export function WorkspacesProvider({
 }) {
   const { user } = useUser();
   const [workspaces, setWorkspaces] = useState<any[]>([]);
+  console.log("renderign");
+  // const { data, loading } = useQuery(queries.LIST_WORKSPACES, {
+  //   skip: !user,
+  //   fetchPolicy: "cache-and-network",
+  // });
+  // const { data: dataPush } = useSubscription(subscriptions.WORKSPACE, {
+  //   skip: !user,
+  // });
 
-  const { data, loading } = useQuery(queries.LIST_WORKSPACES, {
-    skip: !user,
-    fetchPolicy: "cache-and-network",
-  });
-  const { data: dataPush } = useSubscription(subscriptions.WORKSPACE, {
-    skip: !user,
-  });
+  //change
 
-  useEffect(() => {
-    if (data) setWorkspaces(data.listWorkspaces);
-  }, [data]);
+  const data = {
+    listWorkspaces: [],
+  };
+  const dataPush = {
+    onUpdateWorkspace: {
+      objectId: "flsdkfjl",
+    },
+  };
+  const loading = false;
+  // useEffect(() => {
+  //   if (data) setWorkspaces(data.listWorkspaces);
+  // }, [data]);
 
-  useEffect(() => {
-    if (dataPush) {
-      setWorkspaces([
-        ...workspaces.filter(
-          (item) => item.objectId !== dataPush.onUpdateWorkspace.objectId
-        ),
-        dataPush.onUpdateWorkspace,
-      ]);
-    }
-  }, [dataPush]);
+  // useEffect(() => {
+  //   if (dataPush) {
+  //     setWorkspaces([
+  //       ...workspaces.filter(
+  //         (item) => item.objectId !== dataPush.onUpdateWorkspace.objectId
+  //       ),
+  //       dataPush.onUpdateWorkspace,
+  //     ]);
+  //   }
+  // }, [dataPush]);
 
   return (
     <WorkspacesContext.Provider
