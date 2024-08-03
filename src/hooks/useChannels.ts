@@ -4,9 +4,11 @@ import { ChannelsContext } from "../contexts/ChannelsContext";
 // import * as subscriptions from "../graphql/subscriptions";
 import useAuth from "../hooks/useAuth";
 import { useContext, useEffect, useState } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
+import { fetcher, postData } from "../utils/api-helpers";
+import toast from "react-hot-toast";
 
-function compareName(a: any, b: any) {
+export function compareName(a: any, b: any) {
   if (a.name < b.name) {
     return -1;
   }
@@ -18,11 +20,13 @@ function compareName(a: any, b: any) {
 
 export function useChannelsByWorkspace() {
   const location = useLocation();
+  const navigate = useNavigate();
   const workspaceId = location.pathname
     .split("/dashboard/workspaces/")[1]
     ?.split("/")[0];
 
   const [channels, setChannels] = useState<any[]>([]);
+  const [loading, setLoadnig] = useState(false);
 
   // const { data, loading } = useQuery(queries.LIST_CHANNELS, {
   //   variables: {
@@ -38,48 +42,85 @@ export function useChannelsByWorkspace() {
   //   skip: !workspaceId,
   // });
 
-  const loading = false;
-  const data = {
-    listChannels: [],
-  };
-  const dataPush = {
-    onUpdateChannel: {
-      objectId: "lkds",
-    },
-  };
+  async function addChannel({
+    name,
+    details,
+    workspaceId,
+  }: {
+    name: string;
+    details: string;
+    workspaceId: string;
+  }) {
+    try {
+      const { channelId } = await postData("channels", {
+        name,
+        details,
+        workspaceId,
+      });
+      await getWorkSpaceChannels();
+      navigate(`/dashboard/workspaces/${workspaceId}/channels/${channelId}`);
+      toast.success("Channel created.");
+    } catch (err: any) {
+      toast.error(err.message);
+    }
+  }
+
+  async function getWorkSpaceChannels() {
+    try {
+      setLoadnig(true);
+      if (workspaceId) {
+        const channels = await fetcher(`channels/${workspaceId}`);
+        if (channels.channels) {
+          setChannels(channels.channels);
+        }
+      } else {
+        toast.error("select a workspace");
+      }
+      setLoadnig(false);
+    } catch (err) {
+      setLoadnig(false);
+      console.log(err);
+    }
+  }
+
+  useEffect(() => {
+    getWorkSpaceChannels();
+  }, []);
+
   //change
 
-  useEffect(() => {
-    if (data) setChannels(data.listChannels);
-  }, [data]);
+  // useEffect(() => {
+  //   if (data) setChannels(data.listChannels);
+  // }, [data]);
 
-  useEffect(() => {
-    if (dataPush) {
-      setChannels([
-        ...channels.filter(
-          (item) => item.objectId !== dataPush.onUpdateChannel.objectId
-        ),
-        dataPush.onUpdateChannel,
-      ]);
-    }
-  }, [dataPush]);
-
+  // useEffect(() => {
+  //   if (dataPush) {
+  //     setChannels([
+  //       ...channels.filter(
+  //         (item) => item.objectId !== dataPush.onUpdateChannel.objectId
+  //       ),
+  //       dataPush.onUpdateChannel,
+  //     ]);
+  //   }
+  // }, [dataPush]);
+  const arr = [...channels]
+    .sort(compareName)
+    ?.filter((c) => c.isDeleted === false);
+  console.log(arr, "arr ?>>>>>>>>>>>.");
   return {
-    value: [...channels]
-      .sort(compareName)
-      ?.filter((c) => c.isDeleted === false),
+    value: channels,
     loading,
+    addChannel,
   };
 }
 
 export function useChannels() {
   const { user }: any = useAuth();
   const { value } = useContext(ChannelsContext);
-
   return {
     value: value?.filter(
       (c: any) =>
-        c.members.includes(user?.uid) &&
+        c.members.includes(user?._id) &&
         c.isArchived === false &&
         c.isDeleted === false
     ),

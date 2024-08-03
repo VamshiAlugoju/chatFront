@@ -3,20 +3,22 @@ import { useUser } from "../contexts/UserContext";
 // import * as queries from "graphql/queries";
 // import * as subscriptions from "graphql/subscriptions";
 import React, { createContext, useContext, useEffect, useState } from "react";
+import { fetcher, postData } from "../utils/api-helpers";
+import toast from "react-hot-toast";
 
 export const WorkspacesContext = createContext({
   value: null as any,
   loading: true,
+  addNewWorkspace: async (name: string) => {},
 });
 
 export function useMyWorkspaces() {
   const { user } = useUser();
   const { value, loading } = useContext(WorkspacesContext);
-
   return {
     value: value
       ?.filter(
-        (w: any) => w.isDeleted === false && w.members.includes(user?.uid)
+        (w: any) => w.isDeleted === false && w.members.includes(user?._id)
       )
       ?.sort(
         (a: any, b: any) =>
@@ -33,7 +35,7 @@ export function WorkspacesProvider({
 }) {
   const { user } = useUser();
   const [workspaces, setWorkspaces] = useState<any[]>([]);
-  console.log("renderign");
+  const [loading, setIsLoading] = useState(true);
   // const { data, loading } = useQuery(queries.LIST_WORKSPACES, {
   //   skip: !user,
   //   fetchPolicy: "cache-and-network",
@@ -43,16 +45,45 @@ export function WorkspacesProvider({
   // });
 
   //change
+  async function getWorkspaces() {
+    setIsLoading(true);
+    try {
+      const data = await fetcher("workspaces");
 
-  const data = {
-    listWorkspaces: [],
-  };
-  const dataPush = {
-    onUpdateWorkspace: {
-      objectId: "flsdkfjl",
-    },
-  };
-  const loading = false;
+      if (data) setWorkspaces(data.workspaces);
+
+      setIsLoading(false);
+    } catch (err) {
+      console.log(err);
+      setIsLoading(false);
+    }
+  }
+
+  useEffect(() => {
+    getWorkspaces();
+  }, []);
+
+  async function addNewWorkspace(name: string) {
+    try {
+      await postData("workspaces", {
+        name,
+      });
+      await getWorkspaces();
+    } catch (err: any) {
+      console.log(err);
+      toast.error(err?.message);
+    }
+  }
+
+  // const data = {
+  //   workspaces: [],
+  // };
+  // const dataPush = {
+  //   onUpdateWorkspace: {
+  //     objectId: "flsdkfjl",
+  //   },
+  // };
+
   // useEffect(() => {
   //   if (data) setWorkspaces(data.listWorkspaces);
   // }, [data]);
@@ -73,6 +104,7 @@ export function WorkspacesProvider({
       value={{
         value: workspaces?.filter((w: any) => w.isDeleted === false),
         loading,
+        addNewWorkspace,
       }}
     >
       {children}

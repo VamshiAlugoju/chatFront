@@ -77,7 +77,7 @@ function EmojiDropdown({
 
             {open && (
               <div>
-                <Popover.Panel
+                {/* <Popover.Panel
                   static
                   className="origin-top-left absolute bottom-0 right-0"
                 >
@@ -88,7 +88,7 @@ function EmojiDropdown({
                     native
                     set="apple"
                   />
-                </Popover.Panel>
+                </Popover.Panel> */}
               </div>
             )}
           </>
@@ -453,14 +453,14 @@ function Editor({
     const type = dmId ? "directs" : "channels";
     const id = dmId || channelId;
     if (isTyping) {
-      postData(
-        `/${type}/${id}/typing_indicator`,
-        {
-          isTyping: true,
-        },
-        {},
-        false
-      );
+      // postData(
+      //   `/${type}/${id}/typing_indicator`,
+      //   {
+      //     isTyping: true,
+      //   },
+      //   {},
+      //   false
+      // );
     }
   }, [isTyping]);
 
@@ -471,25 +471,25 @@ function Editor({
 
     if (isTyping && !isSubmitting) {
       interval = setInterval(() => {
-        postData(
-          `/${type}/${id}/typing_indicator`,
-          {
-            isTyping: true,
-          },
-          {},
-          false
-        );
+        // postData(
+        //   `/${type}/${id}/typing_indicator`,
+        //   {
+        //     isTyping: true,
+        //   },
+        //   {},
+        //   false
+        // );
       }, 3000);
     } else {
       clearInterval(interval);
-      postData(
-        `/${type}/${id}/typing_indicator`,
-        {
-          isTyping: false,
-        },
-        {},
-        false
-      );
+      // postData(
+      //   `/${type}/${id}/typing_indicator`,
+      //   {
+      //     isTyping: false,
+      //   },
+      //   {},
+      //   false
+      // );
     }
     return () => clearInterval(interval);
   }, [isTyping]);

@@ -39,7 +39,7 @@ export default function WorkspaceSettings({ workspace }: { workspace: any }) {
             leaveFrom="opacity-100"
             leaveTo="opacity-0"
           >
-            <Dialog.Overlay className="fixed inset-0 bg-gray-900 bg-opacity-50 transition-opacity" />
+            {/* <Dialog.Overlay className="fixed inset-0 bg-gray-900 bg-opacity-50 transition-opacity" /> */}
           </Transition.Child>
 
           {/* This element is to trick the browser into centering the modal contents. */}

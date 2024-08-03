@@ -28,13 +28,13 @@ export default function Messages({ lastRead }: { lastRead: number | null }) {
 
   const { ref, inView } = useInView();
 
-  useEffect(() => {
-    if (inView) setPage(page + 1);
-  }, [inView]);
+  // useEffect(() => {
+  //   if (inView) setPage(page + 1);
+  // }, [inView]);
 
-  useEffect(() => {
-    setPage(1);
-  }, [channelId, dmId]);
+  // useEffect(() => {
+  //   setPage(1);
+  // }, [channelId, dmId]);
 
   const displayMessages = useMemo(
     () => (

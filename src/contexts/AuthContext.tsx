@@ -5,6 +5,7 @@
 //   logout as GQLLogout,
 // } from "gqlite-lib/dist/client/auth";
 import { createContext, useEffect, useReducer } from "react";
+import { fetcher, postData } from "../utils/api-helpers";
 
 const initialState = {
   isAuthenticated: false,
@@ -25,7 +26,8 @@ const handlers = {
   },
   LOGIN: (state: any, action: any) => {
     const { user } = action.payload;
-
+    debugger;
+    localStorage.setItem("token", user.token);
     return {
       ...state,
       isAuthenticated: true,
@@ -65,9 +67,13 @@ export const AuthProvider = (props: any) => {
 
   useEffect(() => {
     const initialize = async () => {
-      // const user = await getUser();
-      // change
-      const user = {};
+      const token = localStorage.getItem("token");
+
+      let user = null;
+      if (token) {
+        user = await fetcher("users/token");
+      }
+
       if (user) {
         dispatch({
           type: "INITIALIZE",
@@ -91,15 +97,19 @@ export const AuthProvider = (props: any) => {
   }, []);
 
   const login = async (email: string, password: string) => {
-    // const user = await GQLLogin(email, password);
-    //change
-    const user = {};
-    dispatch({
-      type: "LOGIN",
-      payload: {
-        user,
-      },
-    });
+    try {
+      const user = await postData("users/login", { email, password });
+      //change
+      // const user = {};
+      dispatch({
+        type: "LOGIN",
+        payload: {
+          user,
+        },
+      });
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   const logout = async () => {

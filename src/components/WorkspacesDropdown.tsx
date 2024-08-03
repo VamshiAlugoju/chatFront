@@ -57,7 +57,7 @@ export function WorkspacesDropdown({
       <div className="mt-2 relative">
         <Listbox.Button className="relative w-full th-bg-bg border th-border-brblack rounded-md shadow-sm pl-3 pr-10 py-2 text-left cursor-default focus:outline-none sm:text-sm">
           <span className="flex items-center">
-            <img
+            {/* <img
               src={
                 getHref(select?.thumbnailURL) ||
                 getHref(select?.photoURL) ||
@@ -65,7 +65,7 @@ export function WorkspacesDropdown({
               }
               alt=""
               className="flex-shrink-0 h-6 w-6 rounded-md"
-            />
+            /> */}
             <span className="ml-3 block truncate th-color-for">
               {select.name}
             </span>
@@ -83,10 +83,10 @@ export function WorkspacesDropdown({
         >
           <Listbox.Options className="absolute z-10 mt-1 w-full th-bg-bg shadow-lg max-h-56 rounded-md py-1 text-base ring-1 ring-black ring-opacity-5 overflow-auto focus:outline-none sm:text-sm">
             {workspaces.map((workspace: any) => {
-              const photoURL =
-                getHref(workspace?.thumbnailURL) ||
-                getHref(workspace?.photoURL) ||
-                `${process.env.PUBLIC_URL}/blank_workspace.png`;
+              const photoURL = "";
+              // getHref(workspace?.thumbnailURL) ||
+              // getHref(workspace?.photoURL) ||
+              // `${process.env.PUBLIC_URL}/blank_workspace.png`;
               return (
                 <Listbox.Option
                   key={workspace.objectId}

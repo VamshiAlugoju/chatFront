@@ -1,4 +1,11 @@
-import { Dialog, Disclosure, Transition } from "@headlessui/react";
+import {
+  Dialog,
+  Disclosure,
+  Transition,
+  TransitionChild,
+  DisclosurePanel,
+  DisclosureButton,
+} from "@headlessui/react";
 import {
   DotsHorizontalIcon,
   HashtagIcon,
@@ -11,7 +18,11 @@ import { useModal } from "../../../contexts/ModalContext";
 import { useTheme } from "../../../contexts/ThemeContext";
 import { useUser } from "../../../contexts/UserContext";
 import { Formik } from "formik";
-import { useChannelById, useChannels } from "../../../hooks/useChannels";
+import {
+  useChannelById,
+  useChannels,
+  useChannelsByWorkspace,
+} from "../../../hooks/useChannels";
 import { useDetailByChat } from "../../../hooks/useDetails";
 // import { ReactComponent as ArrowIcon } from "icons/arrow.svg";
 import { Fragment, useRef } from "react";
@@ -26,10 +37,11 @@ function CreateChannel() {
   const cancelButtonRef = useRef(null);
   const { openCreateChannel: open, setOpenCreateChannel: setOpen } = useModal();
   const { workspaceId } = useParams();
+  const { addChannel } = useChannelsByWorkspace();
   const navigate = useNavigate();
 
   return (
-    <Transition.Root show={open} as={Fragment}>
+    <Transition show={open} as={Fragment}>
       <Dialog
         as="div"
         static
@@ -39,7 +51,7 @@ function CreateChannel() {
         onClose={setOpen}
       >
         <div className="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
-          <Transition.Child
+          {/* <TransitionChild
             as={Fragment}
             enter="ease-out duration-300"
             enterFrom="opacity-0"
@@ -47,9 +59,9 @@ function CreateChannel() {
             leave="ease-in duration-200"
             leaveFrom="opacity-100"
             leaveTo="opacity-0"
-          >
-            <Dialog.Overlay className="fixed inset-0 bg-gray-900 bg-opacity-50 transition-opacity" />
-          </Transition.Child>
+          > */}
+          {/* <Dialog.Overlay className="fixed inset-0 bg-gray-900 bg-opacity-50 transition-opacity" /> */}
+          {/* </TransitionChild> */}
 
           {/* This element is to trick the browser into centering the modal contents. */}
           <span
@@ -58,7 +70,7 @@ function CreateChannel() {
           >
             &#8203;
           </span>
-          <Transition.Child
+          <TransitionChild
             as={Fragment}
             enter="ease-out duration-300"
             enterFrom="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
@@ -105,20 +117,12 @@ function CreateChannel() {
                 enableReinitialize
                 onSubmit={async ({ name, details }, { setSubmitting }) => {
                   setSubmitting(true);
-                  try {
-                    const { channelId } = await postData("/channels", {
-                      name,
-                      details,
-                      workspaceId,
-                    });
-                    navigate(
-                      `/dashboard/workspaces/${workspaceId}/channels/${channelId}`
-                    );
-                    toast.success("Channel created.");
-                    setOpen(false);
-                  } catch (err: any) {
-                    toast.error(err.message);
+                  if (workspaceId) {
+                    await addChannel({ name, details, workspaceId });
+                  } else {
+                    toast.error("select workspace ");
                   }
+                  setOpen(false);
                   setSubmitting(false);
                 }}
               >
@@ -177,10 +181,10 @@ function CreateChannel() {
                 )}
               </Formik>
             </div>
-          </Transition.Child>
+          </TransitionChild>
         </div>
       </Dialog>
-    </Transition.Root>
+    </Transition>
   );
 }
 
@@ -284,13 +288,12 @@ function AddChannels() {
 export default function Channels() {
   const { themeColors } = useTheme();
   const { value } = useChannels();
-
   return (
     <div>
       <Disclosure defaultOpen>
         {({ open }) => (
           <>
-            <Disclosure.Button className="flex justify-between items-center px-4 cursor-pointer">
+            <DisclosureButton className="flex justify-between items-center px-4 cursor-pointer">
               <div className="flex items-center">
                 {/* <ArrowIcon
                   className={`h-4 w-4 mr-2 ${
@@ -308,8 +311,8 @@ export default function Channels() {
                   Channels
                 </h5>
               </div>
-            </Disclosure.Button>
-            <Disclosure.Panel
+            </DisclosureButton>
+            <DisclosurePanel
               style={{ color: themeColors?.foreground }}
               className="pt-3 pb-2 text-sm space-y-1"
             >
@@ -321,7 +324,7 @@ export default function Channels() {
                 />
               ))}
               <AddChannels />
-            </Disclosure.Panel>
+            </DisclosurePanel>
           </>
         )}
       </Disclosure>

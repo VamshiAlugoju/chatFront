@@ -14,6 +14,7 @@ export function useDirectMessagesByWorkspace() {
     ?.split("/")[0];
 
   const [directs, setDirects] = useState<any[]>([]);
+  const [loading, setLoading] = useState(false);
 
   // const { data, loading } = useQuery(queries.LIST_DIRECTS, {
   //   variables: {
@@ -31,6 +32,8 @@ export function useDirectMessagesByWorkspace() {
 
   //change
 
+  useEffect(() => {}, []);
+
   const data = {
     listDirects: [],
   };
@@ -39,21 +42,20 @@ export function useDirectMessagesByWorkspace() {
       objectId: "lskf;l",
     },
   };
-  const loading = false;
-  useEffect(() => {
-    if (data) setDirects(data.listDirects);
-  }, [data]);
+  // useEffect(() => {
+  //   if (data) setDirects(data.listDirects);
+  // }, [data]);
 
-  useEffect(() => {
-    if (dataPush) {
-      setDirects([
-        ...directs.filter(
-          (item) => item.objectId !== dataPush.onUpdateDirect.objectId
-        ),
-        dataPush.onUpdateDirect,
-      ]);
-    }
-  }, [dataPush]);
+  // useEffect(() => {
+  //   if (dataPush) {
+  //     setDirects([
+  //       ...directs.filter(
+  //         (item) => item.objectId !== dataPush.onUpdateDirect.objectId
+  //       ),
+  //       dataPush.onUpdateDirect,
+  //     ]);
+  //   }
+  // }, [dataPush]);
 
   return {
     value: directs?.filter((item: any) => item.active.includes(user?.uid)),

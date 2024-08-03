@@ -14,6 +14,7 @@ export function useDetailsByWorkspace() {
     ?.split("/")[0];
 
   const [details, setDetails] = useState<any[]>([]);
+  const [loading, setLoading] = useState(false);
 
   // const { data, loading } = useQuery(queries.LIST_DETAILS, {
   //   variables: {
@@ -40,22 +41,21 @@ export function useDetailsByWorkspace() {
       objectId: "sdlfk",
     },
   };
-  const loading = false;
 
-  useEffect(() => {
-    if (data) setDetails(data.listDetails);
-  }, [data]);
+  // useEffect(() => {
+  //   if (data) setDetails(data.listDetails);
+  // }, [data]);
 
-  useEffect(() => {
-    if (dataPush) {
-      setDetails([
-        ...details.filter(
-          (item) => item.objectId !== dataPush.onUpdateDetail.objectId
-        ),
-        dataPush.onUpdateDetail,
-      ]);
-    }
-  }, [dataPush]);
+  // useEffect(() => {
+  //   if (dataPush) {
+  //     setDetails([
+  //       ...details.filter(
+  //         (item) => item.objectId !== dataPush.onUpdateDetail.objectId
+  //       ),
+  //       dataPush.onUpdateDetail,
+  //     ]);
+  //   }
+  // }, [dataPush]);
 
   return {
     value: details,

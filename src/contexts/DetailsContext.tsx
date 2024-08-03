@@ -1,4 +1,4 @@
-// import { useDetailsByWorkspace } from "hooks/useDetails";
+import { useDetailsByWorkspace } from "../hooks/useDetails";
 import { createContext } from "react";
 
 export const DetailsContext = createContext({
@@ -7,9 +7,9 @@ export const DetailsContext = createContext({
 });
 
 export function DetailsProvider({ children }: { children: React.ReactNode }) {
-  // const details = useDetailsByWorkspace();
+  const details = useDetailsByWorkspace();
   // change
-  const details = { value: "", loading: false };
+  // const details = { value: "", loading: false };
   return (
     <DetailsContext.Provider value={details}>
       {children}

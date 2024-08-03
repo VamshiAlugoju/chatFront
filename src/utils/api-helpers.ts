@@ -1,3 +1,4 @@
+import toast from "react-hot-toast";
 import { getAPIUrl } from "../config";
 // import { getIdToken } from "gqlite-lib/dist/client/auth";
 
@@ -55,7 +56,8 @@ export const postData = async (
     body: JSON.stringify(data || {}),
   });
   if (!res.ok && warnIfError) {
-    const e: IError = await res.json();
+    const e = await res.json();
+    toast.error(e.error);
     const error = new Error(e.error.message);
     throw error;
   } else {

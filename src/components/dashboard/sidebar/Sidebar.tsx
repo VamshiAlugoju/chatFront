@@ -80,9 +80,9 @@ function WorkspaceDropdown({
             >
               <div className="px-5 flex py-2">
                 <img
-                  src={
-                    photoURL || `${process.env.PUBLIC_URL}/blank_workspace.png`
-                  }
+                  // src={
+                  //   photoURL || `${process.env.PUBLIC_URL}/blank_workspace.png`
+                  // }
                   alt="message"
                   className="rounded h-10 w-10"
                 />

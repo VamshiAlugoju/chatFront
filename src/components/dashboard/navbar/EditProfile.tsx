@@ -87,7 +87,7 @@ export default function EditProfile({
             leaveFrom="opacity-100"
             leaveTo="opacity-0"
           >
-            <Dialog.Overlay className="fixed inset-0 bg-gray-900 bg-opacity-50 transition-opacity" />
+            {/* <Dialog.Overlay className="fixed inset-0 bg-gray-900 bg-opacity-50 transition-opacity" /> */}
           </TransitionChild>
 
           {/* This element is to trick the browser into centering the modal contents. */}

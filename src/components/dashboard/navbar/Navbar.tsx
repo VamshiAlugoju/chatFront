@@ -100,11 +100,11 @@ export default function Navbar() {
                   </div>
                   <div
                     className="rounded h-6 w-6 bg-cover"
-                    style={{
-                      backgroundImage: `url(${
-                        photoURL || `${process.env.PUBLIC_URL}/blank_user.png`
-                      })`,
-                    }}
+                    // style={{
+                    //   backgroundImage: `url(${
+                    //     photoURL || `${process.env.PUBLIC_URL}/blank_user.png`
+                    //   })`,
+                    // }}
                   />
                 </Menu.Button>
               </div>
@@ -124,9 +124,9 @@ export default function Navbar() {
                 >
                   <div className="px-5 flex py-2">
                     <img
-                      src={
-                        photoURL || `${process.env.PUBLIC_URL}/blank_user.png`
-                      }
+                      // src={
+                      //   photoURL || `${process.env.PUBLIC_URL}/blank_user.png`
+                      // }
                       alt="message"
                       className="rounded h-10 w-10"
                     />

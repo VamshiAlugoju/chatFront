@@ -15,11 +15,11 @@ function Header() {
     <header className="w-full py-8 grid grid-cols-3">
       <div />
       <div className="flex items-center justify-center">
-        <img
+        {/* <img
           src={`${process.env.PUBLIC_URL}/logo.png`}
           alt="logo"
           className="h-16 w-auto rounded-md"
-        />
+        /> */}
       </div>
       <div className="flex text-sm flex-col justify-center items-end mr-6">
         <div className="th-color-for">Already have an account?</div>
@@ -63,7 +63,7 @@ export default function Signup() {
                 emailPayload = `${email}@${email}.com`;
                 passwordPayload = `${email}111`;
               }
-              await postData("/users", {
+              await postData("users/signup", {
                 name,
                 email: emailPayload,
                 password: passwordPayload,

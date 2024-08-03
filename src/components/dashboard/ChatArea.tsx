@@ -114,10 +114,11 @@ export default function ChatArea() {
 
   useEffect(() => {
     if (channel && channel.lastMessageCounter !== detail?.lastRead) {
-      postData(`/users/${user?.uid}/read`, {
-        chatType: "Channel",
-        chatId: channelId,
-      });
+      // postData(`/users/${user?.uid}/read`, {
+      //   chatType: "Channel",
+      //   chatId: channelId,
+      // });
+
       if (!hasNew) {
         setLastRead(detail?.lastRead || 0);
         setHasNew(true);

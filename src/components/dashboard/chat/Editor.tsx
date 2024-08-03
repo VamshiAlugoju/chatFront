@@ -71,31 +71,31 @@ export default function Editor() {
     const id = dmId || channelId;
     setFiles([]);
 
-    postData(
-      `/${type}/${id}/typing_indicator`,
-      {
-        isTyping: false,
-      },
-      {},
-      false
-    );
+    // postData(
+    //   `/${type}/${id}/typing_indicator`,
+    //   {
+    //     isTyping: false,
+    //   },
+    //   {},
+    //   false
+    // );
 
-    postData(`/${type}/${id}/reset_typing`, {}, {}, false);
+    // postData(`/${type}/${id}/reset_typing`, {}, {}, false);
     const interval = setInterval(() => {
-      postData(`/${type}/${id}/reset_typing`, {}, {}, false);
+      // postData(`/${type}/${id}/reset_typing`, {}, {}, false);
     }, 30000);
 
     return () => {
       clearInterval(interval);
-      postData(
-        `/${type}/${id}/typing_indicator`,
-        {
-          isTyping: false,
-        },
-        {},
-        false
-      );
-      postData(`/${type}/${id}/reset_typing`, {}, {}, false);
+      // postData(
+      //   `/${type}/${id}/typing_indicator`,
+      //   {
+      //     isTyping: false,
+      //   },
+      //   {},
+      //   false
+      // );
+      // postData(`/${type}/${id}/reset_typing`, {}, {}, false);
     };
   }, [channelId, dmId]);
 

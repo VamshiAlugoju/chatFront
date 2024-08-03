@@ -1,4 +1,10 @@
-import { Dialog, RadioGroup, Transition } from "@headlessui/react";
+import {
+  Dialog,
+  RadioGroup,
+  Transition,
+  Radio,
+  TransitionChild,
+} from "@headlessui/react";
 import { XIcon } from "@heroicons/react/outline";
 import ChannelsSection from "../../../components/dashboard/sidebar/ChannelsSection";
 import TeammatesSection from "../../../components/dashboard/sidebar/TeammatesSection";
@@ -18,7 +24,7 @@ export default function CreateMessageModal() {
   } = useModal();
 
   return (
-    <Transition.Root show={open} as={Fragment}>
+    <Transition show={open} as={Fragment}>
       <Dialog
         as="div"
         static
@@ -28,7 +34,7 @@ export default function CreateMessageModal() {
         onClose={setOpen}
       >
         <div className="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
-          <Transition.Child
+          {/* <TransitionChild
             as={Fragment}
             enter="ease-out duration-300"
             enterFrom="opacity-0"
@@ -36,9 +42,9 @@ export default function CreateMessageModal() {
             leave="ease-in duration-200"
             leaveFrom="opacity-100"
             leaveTo="opacity-0"
-          >
-            <Dialog.Overlay className="fixed inset-0 bg-gray-900 bg-opacity-50 transition-opacity" />
-          </Transition.Child>
+          > */}
+          {/* <Dialog.Overlay className="fixed inset-0 bg-gray-900 bg-opacity-50 transition-opacity" /> */}
+          {/* </TransitionChild> */}
 
           {/* This element is to trick the browser into centering the modal contents. */}
           <span
@@ -47,7 +53,7 @@ export default function CreateMessageModal() {
           >
             &#8203;
           </span>
-          <Transition.Child
+          <TransitionChild
             as={Fragment}
             enter="ease-out duration-300"
             enterFrom="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
@@ -93,10 +99,7 @@ export default function CreateMessageModal() {
                   className="flex space-x-6 px-8 text-sm font-normal"
                   style={{ color: themeColors?.foreground }}
                 >
-                  <RadioGroup.Option
-                    value="channels"
-                    className="focus:outline-none"
-                  >
+                  <Radio value="channels" className="focus:outline-none">
                     {({ checked }) => (
                       <div
                         className={classNames(
@@ -110,11 +113,8 @@ export default function CreateMessageModal() {
                         <span>Channels</span>
                       </div>
                     )}
-                  </RadioGroup.Option>
-                  <RadioGroup.Option
-                    value="members"
-                    className="focus:outline-none"
-                  >
+                  </Radio>
+                  <Radio value="members" className="focus:outline-none">
                     {({ checked }) => (
                       <div
                         className={classNames(
@@ -128,7 +128,7 @@ export default function CreateMessageModal() {
                         <span>Members</span>
                       </div>
                     )}
-                  </RadioGroup.Option>
+                  </Radio>
                 </RadioGroup>
                 <div
                   className={classNames("space-y-6 pt-5 pb-8 border-t h-550")}
@@ -142,9 +142,9 @@ export default function CreateMessageModal() {
                 </div>
               </div>
             </div>
-          </Transition.Child>
+          </TransitionChild>
         </div>
       </Dialog>
-    </Transition.Root>
+    </Transition>
   );
 }

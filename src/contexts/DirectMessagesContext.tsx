@@ -1,4 +1,4 @@
-// import { useDirectMessagesByWorkspace } from "hooks/useDirects";
+import { useDirectMessagesByWorkspace } from "../hooks/useDirects";
 import { createContext } from "react";
 
 export const DirectMessagesContext = createContext({
@@ -11,9 +11,8 @@ export function DirectMessagesProvider({
 }: {
   children: React.ReactNode;
 }) {
-  // const dmData = useDirectMessagesByWorkspace();
+  const dmData = useDirectMessagesByWorkspace();
   //change
-  const dmData = { value: "", loading: false };
 
   return (
     <DirectMessagesContext.Provider value={dmData}>

@@ -50,26 +50,26 @@ export function useMessagesByChat(
     setNextToken(null);
   }, [id]);
 
-  useEffect(() => {
-    if (data) {
-      if (nextToken) {
-        setMessages([...messages, ...data.listMessages]);
-      } else {
-        setMessages(data.listMessages);
-      }
-    }
-  }, [data]);
+  // useEffect(() => {
+  //   if (data) {
+  //     if (nextToken) {
+  //       setMessages([...messages, ...data.listMessages]);
+  //     } else {
+  //       setMessages(data.listMessages);
+  //     }
+  //   }
+  // }, [data]);
 
-  useEffect(() => {
-    if (dataPush) {
-      setMessages([
-        ...messages.filter(
-          (item) => item.objectId !== dataPush.onUpdateMessage.objectId
-        ),
-        dataPush.onUpdateMessage,
-      ]);
-    }
-  }, [dataPush]);
+  // useEffect(() => {
+  //   if (dataPush) {
+  //     setMessages([
+  //       ...messages.filter(
+  //         (item) => item.objectId !== dataPush.onUpdateMessage.objectId
+  //       ),
+  //       dataPush.onUpdateMessage,
+  //     ]);
+  //   }
+  // }, [dataPush]);
 
   return {
     value: [...messages].filter((m) => !m.isDeleted).sort(compareDate),

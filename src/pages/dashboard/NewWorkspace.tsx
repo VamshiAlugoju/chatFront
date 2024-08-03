@@ -84,8 +84,11 @@ function HeaderDefaultWorkspace() {
 
 export default function NewWorkspace() {
   const { user } = useUser();
-  const { value: allWorkspaces, loading: loadingAllWorkspaces } =
-    useContext(WorkspacesContext);
+  const {
+    value: allWorkspaces,
+    loading: loadingAllWorkspaces,
+    addNewWorkspace,
+  } = useContext(WorkspacesContext);
   const { value: workspaces } = useMyWorkspaces();
   const [createWorkspaceLoading, setCreateWorkspaceLoading] = useState(false);
 
@@ -123,10 +126,7 @@ export default function NewWorkspace() {
                   onSubmit={async ({ workspaceName }) => {
                     setCreateWorkspaceLoading(true);
                     try {
-                      console.log(">>>>>>>>>>........");
-                      await postData("/workspaces", {
-                        name: workspaceName,
-                      });
+                      await addNewWorkspace(workspaceName);
                     } catch (err: any) {
                       toast.error(err.message);
                       setCreateWorkspaceLoading(false);
