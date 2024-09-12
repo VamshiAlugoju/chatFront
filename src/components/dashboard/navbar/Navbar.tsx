@@ -1,4 +1,4 @@
-import { Menu, Transition } from "@headlessui/react";
+import { Menu, Transition , MenuItem , MenuButton ,MenuItems } from "@headlessui/react";
 import { SearchIcon } from "@heroicons/react/outline";
 import EditPasswordModal from "../../../components/dashboard/EditPasswordModal";
 import EditProfile from "../../../components/dashboard/navbar/EditProfile";
@@ -14,7 +14,7 @@ import hexToRgbA from "../../../utils/hexToRgbA";
 
 function NavbarItem({ onClick, text }: { onClick: any; text: string }) {
   return (
-    <Menu.Item>
+    <MenuItem>
       {({ active }) => (
         <div
           role="button"
@@ -28,7 +28,7 @@ function NavbarItem({ onClick, text }: { onClick: any; text: string }) {
           {text}
         </div>
       )}
-    </Menu.Item>
+    </MenuItem>
   );
 }
 
@@ -49,7 +49,7 @@ export default function Navbar() {
 
   const { userdata } = useUser();
   const photoURL =
-    getHref(userdata?.thumbnailURL) || getHref(userdata?.photoURL);
+    getHref(userdata?.thumbnailURL) || getHref(userdata?.photoURL) ||  "https://content.tupaki.com/twdata/2020/0320/news/-Khusi--Heroine-Turns-Into-A-Baddie--1584611375-1005.jpg";
 
   return (
     <div
@@ -86,7 +86,7 @@ export default function Navbar() {
           {({ open }) => (
             <>
               <div>
-                <Menu.Button
+                <MenuButton
                   as="div"
                   className="relative mr-2 cursor-pointer appearance-none"
                 >
@@ -100,13 +100,13 @@ export default function Navbar() {
                   </div>
                   <div
                     className="rounded h-6 w-6 bg-cover"
-                    // style={{
-                    //   backgroundImage: `url(${
-                    //     photoURL || `${process.env.PUBLIC_URL}/blank_user.png`
-                    //   })`,
-                    // }}
+                    style={{
+                      backgroundImage: `url(${
+                        photoURL || `${process.env.PUBLIC_URL}/blank_user.png`
+                      })`,
+                    }}
                   />
-                </Menu.Button>
+                </MenuButton>
               </div>
               <Transition
                 show={open}
@@ -118,15 +118,15 @@ export default function Navbar() {
                 leaveFrom="transform opacity-100 scale-100"
                 leaveTo="transform opacity-0 scale-95"
               >
-                <Menu.Items
+                <MenuItems
                   static
                   className="th-bg-bg border th-border-selbg origin-top-right z-10 absolute right-0 mt-2 w-72 rounded-md shadow-xl ring-1 ring-black ring-opacity-5 focus:outline-none py-3"
                 >
                   <div className="px-5 flex py-2">
                     <img
-                      // src={
-                      //   photoURL || `${process.env.PUBLIC_URL}/blank_user.png`
-                      // }
+                      src={
+                        photoURL || `${process.env.PUBLIC_URL}/blank_user.png`
+                      }
                       alt="message"
                       className="rounded h-10 w-10"
                     />
@@ -165,7 +165,7 @@ export default function Navbar() {
                       navigate("/dashboard/logout");
                     }}
                   />
-                </Menu.Items>
+                </MenuItems>
               </Transition>
             </>
           )}

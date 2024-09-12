@@ -5,25 +5,22 @@ import { useUser } from "../contexts/UserContext";
 import React, { createContext, useContext, useEffect, useState } from "react";
 import { fetcher, postData } from "../utils/api-helpers";
 import toast from "react-hot-toast";
-
+import useAuth from "./useAuth";
 export const WorkspacesContext = createContext({
   value: null as any,
   loading: true,
-  addNewWorkspace: async (name: string) => {},
+  addNewWorkspace: async (name: string) : Promise<any> => {},
 });
 
 export function useMyWorkspaces() {
   const { user } = useUser();
   const { value, loading } = useContext(WorkspacesContext);
+  
+  const arr = value?.filter((item : any) => item.isDeleted === false  && item.members.includes(user?._id)).sort((a: any, b: any) =>
+    new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())
+   console.log(arr , user , 'helooooooooooooooo')
   return {
-    value: value
-      ?.filter(
-        (w: any) => w.isDeleted === false && w.members.includes(user?._id)
-      )
-      ?.sort(
-        (a: any, b: any) =>
-          new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
-      ),
+    value:  arr,
     loading,
   };
 }
@@ -34,6 +31,7 @@ export function WorkspacesProvider({
   children: React.ReactNode;
 }) {
   const { user } = useUser();
+  const auth = useAuth()
   const [workspaces, setWorkspaces] = useState<any[]>([]);
   const [loading, setIsLoading] = useState(true);
   // const { data, loading } = useQuery(queries.LIST_WORKSPACES, {
@@ -45,14 +43,16 @@ export function WorkspacesProvider({
   // });
 
   //change
+ 
   async function getWorkspaces() {
     setIsLoading(true);
     try {
       const data = await fetcher("workspaces");
-
+     
       if (data) setWorkspaces(data.workspaces);
 
       setIsLoading(false);
+      
     } catch (err) {
       console.log(err);
       setIsLoading(false);
@@ -61,14 +61,15 @@ export function WorkspacesProvider({
 
   useEffect(() => {
     getWorkspaces();
-  }, []);
+  }, [auth.isAuthenticated , user ]);
 
   async function addNewWorkspace(name: string) {
     try {
-      await postData("workspaces", {
+      const data =  await postData("workspaces", {
         name,
       });
       await getWorkspaces();
+      return data;
     } catch (err: any) {
       console.log(err);
       toast.error(err?.message);
@@ -98,7 +99,6 @@ export function WorkspacesProvider({
   //     ]);
   //   }
   // }, [dataPush]);
-
   return (
     <WorkspacesContext.Provider
       value={{
@@ -114,5 +114,5 @@ export function WorkspacesProvider({
 
 export function useWorkspaceById(id: any) {
   const { value } = useContext(WorkspacesContext);
-  return { value: value?.find((p: any) => p.objectId === id) };
+  return { value: value?.find((p: any) => p._id === id) };
 }

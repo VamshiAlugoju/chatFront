@@ -19,6 +19,8 @@ export const fetcher = async (url: string) => {
   const idToken = localStorage.getItem("token");
   if (idToken) {
     headers.Authorization = `Bearer ${idToken}`;
+  }else{
+    return;
   }
 
   const res = await fetch(`${getAPIUrl()}${url}`, {

@@ -1,4 +1,4 @@
-import { Tab } from "@headlessui/react";
+import { Tab , TabList } from "@headlessui/react";
 import AuthButton from "../../components/authentication/AuthButton";
 import LoadingScreen from "../../components/LoadingScreen";
 import TextField from "../../components/TextField";
@@ -26,7 +26,7 @@ export function TabLists() {
           aria-label="Tabs"
         >
           {tabs.map((tab) => (
-            <Tab.List key={tab.name} className="w-1/2 text-center flex">
+            <TabList key={tab.name} className="w-1/2 text-center flex">
               <Tab as={Fragment}>
                 {({ selected }) => (
                   <button
@@ -51,7 +51,7 @@ export function TabLists() {
                   </button>
                 )}
               </Tab>
-            </Tab.List>
+            </TabList>
           ))}
         </nav>
       </div>

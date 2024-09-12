@@ -1,4 +1,4 @@
-import { Dialog, Tab, Transition } from "@headlessui/react";
+import { Dialog, Tab, Transition  , TransitionChild ,TabPanel , TabGroup} from "@headlessui/react";
 import { PlusIcon, XIcon } from "@heroicons/react/outline";
 import ModalButton from "../../../components/dashboard/ModalButton";
 import Spinner from "../../../components/Spinner";
@@ -24,21 +24,20 @@ import * as Yup from "yup";
 
 function CreateWorkspace() {
   const { user } = useUser();
-  const { value: allWorkspaces, loading } = useContext(WorkspacesContext);
+  const { value: allWorkspaces, loading  , addNewWorkspace} = useContext(WorkspacesContext);
   const cancelButtonRef = useRef(null);
   const { openCreateWorkspace: open, setOpenCreateWorkspace: setOpen } =
     useModal();
-  const { value: workspaces } = useMyWorkspaces();
+  const { value: workspaces  } = useMyWorkspaces();
   const navigate = useNavigate();
 
   const workspacesToJoin = allWorkspaces?.filter(
     (item: any) => !item.members.includes(user?.uid)
   );
-
   const [isLoading, setIsLoading] = React.useState(false);
 
   return (
-    <Transition.Root show={open} as={Fragment}>
+    <Transition show={open} as={Fragment}>
       <Dialog
         as="div"
         static
@@ -48,26 +47,14 @@ function CreateWorkspace() {
         onClose={setOpen}
       >
         <div className="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
-          <Transition.Child
-            as={Fragment}
-            enter="ease-out duration-300"
-            enterFrom="opacity-0"
-            enterTo="opacity-100"
-            leave="ease-in duration-200"
-            leaveFrom="opacity-100"
-            leaveTo="opacity-0"
-          >
-            {/* <Dialog.Overlay className="fixed inset-0 bg-gray-900 bg-opacity-50 transition-opacity" /> */}
-          </Transition.Child>
-
-          {/* This element is to trick the browser into centering the modal contents. */}
+        
           <span
             className="hidden sm:inline-block sm:align-middle sm:h-screen"
             aria-hidden="true"
           >
             &#8203;
           </span>
-          <Transition.Child
+          <TransitionChild
             as={Fragment}
             enter="ease-out duration-300"
             enterFrom="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
@@ -93,13 +80,13 @@ function CreateWorkspace() {
               <div className="p-6 pt-0 pb-6 th-bg-bg">
                 <span className="font-base text-sm th-color-for">
                   A workspace is made up of channels, where team members can
-                  communicate and work together.
+                  {/* communicate and work together. */}
                 </span>
 
-                <Tab.Group>
+                <TabGroup>
                   <TabLists />
-                  <Tab.Panels>
-                    <Tab.Panel className="focus:outline-none">
+                  
+                  <TabPanel className="focus:outline-none">
                       <Formik
                         initialValues={{
                           name: "",
@@ -111,12 +98,8 @@ function CreateWorkspace() {
                         onSubmit={async ({ name }, { setSubmitting }) => {
                           setSubmitting(true);
                           try {
-                            const { workspaceId, channelId } = await postData(
-                              "/workspaces",
-                              {
-                                name,
-                              }
-                            );
+                            const {workspaceId , channelId} =  await  addNewWorkspace(name)
+                          
                             while (
                               workspaces?.find(
                                 (w: any) => w.objectId === workspaceId
@@ -125,7 +108,7 @@ function CreateWorkspace() {
                               /* eslint-disable-next-line */
                               await wait(1000);
                             }
-                            await wait(2000);
+                            // await wait(2000);
                             navigate(
                               `/dashboard/workspaces/${workspaceId}/channels/${channelId}`
                             );
@@ -163,8 +146,8 @@ function CreateWorkspace() {
                           </form>
                         )}
                       </Formik>
-                    </Tab.Panel>
-                    <Tab.Panel className="focus:outline-none">
+                    </TabPanel>
+                  <TabPanel className="focus:outline-none">
                       {loading ? (
                         <Spinner />
                       ) : (
@@ -230,15 +213,16 @@ function CreateWorkspace() {
                           )}
                         </Formik>
                       )}
-                    </Tab.Panel>
-                  </Tab.Panels>
-                </Tab.Group>
+                    </TabPanel>
+           
+                </TabGroup>
               </div>
             </div>
-          </Transition.Child>
+          </TransitionChild>
         </div>
       </Dialog>
-    </Transition.Root>
+    </Transition>
+    
   );
 }
 
@@ -255,7 +239,7 @@ function WorkspaceItem({
   const { workspaceId } = useParams();
   const navigate = useNavigate();
   const selected = objectId === workspaceId;
-  const photoURL = src;
+  const photoURL = src || "https://content.tupaki.com/twdata/2020/0320/news/-Khusi--Heroine-Turns-Into-A-Baddie--1584611375-1005.jpg";
   return (
     <div
       role="button"
@@ -268,7 +252,7 @@ function WorkspaceItem({
       }
     >
       <img
-        // src={photoURL || `${process.env.PUBLIC_URL}/blank_workspace.png`}
+        src={photoURL || `${process.env.PUBLIC_URL}/blank_workspace.png`}
         alt="workspace"
         className={classNames(
           selected ? "border-2" : "",
@@ -306,8 +290,8 @@ export default function Workspaces() {
     <div className="row-span-2 border-r flex flex-col items-center space-y-5 py-5 flex-1 overflow-y-auto th-bg-selbg th-border-bg">
       {value?.map((doc: any) => (
         <WorkspaceItem
-          key={doc.objectId}
-          objectId={doc.objectId}
+          key={doc._id}
+          objectId={doc._id}
           channelId={doc.channelId}
           src={getHref(doc.thumbnailURL) || getHref(doc.photoURL)}
         />

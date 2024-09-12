@@ -18,7 +18,7 @@ export default function SmallScreen({
               <span className="sr-only">{APP_NAME}</span>
               <img
                 className="h-16 w-auto rounded"
-                src={`${process.env.PUBLIC_URL}/logo.png`}
+                // src={`${process.env.PUBLIC_URL}/logo.png`}
                 alt="Logo"
               />
             </a>

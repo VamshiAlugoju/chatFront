@@ -13,6 +13,7 @@ import { useLocation, useNavigate, useParams } from "react-router-dom";
 import styled from "styled-components";
 import { postData } from "../../utils/api-helpers";
 import { getHref } from "../../utils/get-file-url";
+import { values } from "lodash";
 
 const SelectChannel = styled.button`
   :hover {
@@ -97,6 +98,7 @@ function HeaderDirectMessage() {
 export default function ChatArea() {
   const { user } = useUser();
   const { channelId, dmId } = useParams();
+ 
   const { value: channel } = useChannelById(channelId);
   const { value: directMessage } = useDirectMessageById(dmId);
   const { value: detail } = useDetailByChat(channelId || dmId);

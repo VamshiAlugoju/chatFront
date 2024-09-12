@@ -20,6 +20,7 @@ import {
 import { postData } from "../../utils/api-helpers";
 import classNames from "../../utils/classNames";
 import { getHref } from "../../utils/get-file-url";
+import { useChannelsByWorkspace } from "../../hooks/useChannels";
 
 function ProfileViewItem({ value, text }: { value: string; text: string }) {
   return (
@@ -39,7 +40,7 @@ function ProfileView() {
   const { isPresent } = usePresenceByUserId(userId);
 
   const photoURL = getHref(value?.photoURL);
-
+ 
   return (
     <div className="row-span-2 border-l flex flex-col overflow-hidden th-border-selbg">
       <div className="h-14 border-b flex items-center justify-between py-1 px-4 th-border-selbg">
@@ -89,6 +90,8 @@ function ProfileView() {
 export default function Dashboard() {
   const { workspaceId, channelId, dmId } = useParams();
   const { value, loading } = useMyWorkspaces();
+  const workspaceCha = useChannelsByWorkspace();
+  
   const { user } = useUser();
   const location = useLocation();
   const profile = location.pathname?.includes("user_profile");
@@ -109,28 +112,30 @@ export default function Dashboard() {
       document.documentElement.style.setProperty("--vh", `${vh}px`);
     };
     window.addEventListener("resize", appHeight);
-  }, []);
+  }, []); 
 
-  if (loading) return <LoadingScreen />;
+  // if (loading) return <LoadingScreen />;
 
   if (value?.length === 0) return <Navigate to="/dashboard/new_workspace" />;
 
-  if (!workspaceId || !value.find((w: any) => w.objectId === workspaceId))
+  if (!workspaceId || !value.find((w: any) => w._id === workspaceId)){
+    
     return (
       <Navigate
-        to={`/dashboard/workspaces/${value[0].objectId}/channels/${value[0].channelId}`}
+        to={`/dashboard/workspaces/${value[0]._id}/channels/${value[0].channelId}`}
       />
     );
+  }
 
   if (workspaceId && !channelId && !dmId)
     return (
       <Navigate
         to={`/dashboard/workspaces/${workspaceId}/channels/${
-          value.find((w: any) => w.objectId === workspaceId)?.channelId
+          value.find((w: any) => w._id === workspaceId)?.channelId
         }`}
       />
     );
-
+  
   return (
     <>
       <Helmet>
@@ -148,6 +153,6 @@ export default function Dashboard() {
         <ChatArea />
         {profile && <ProfileView />}
       </div>
-    </>
+    </> 
   );
 }

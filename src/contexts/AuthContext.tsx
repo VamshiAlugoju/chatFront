@@ -31,14 +31,16 @@ const handlers = {
     return {
       ...state,
       isAuthenticated: true,
-      user,
+      user : user.user
     };
   },
-  LOGOUT: (state: any) => ({
+  LOGOUT: (state: any) =>  {
+    localStorage.removeItem("token")
+    return {
     ...state,
     isAuthenticated: false,
     user: null,
-  }),
+  }},
   REGISTER: (state: any, action: any) => {
     const { user } = action.payload;
 
@@ -112,24 +114,27 @@ export const AuthProvider = (props: any) => {
     }
   };
 
+  
+
   const logout = async () => {
     // await GQLLogout();
     //change
-
+  
     dispatch({ type: "LOGOUT" });
   };
 
   const register = async (email: string, password: string) => {
     // const user = await createUser(email, password);
     //change
+  
     const user = {};
 
-    dispatch({
-      type: "REGISTER",
-      payload: {
-        user,
-      },
-    });
+    // dispatch({
+    //   type: "REGISTER",
+    //   payload: {
+    //     user,
+    //   },
+    // });
   };
 
   return (
